@@ -17,7 +17,6 @@
         android:ems="10"
         android:hint="RECORD IN KOREAN!"
         android:inputType="textMultiLine" >
-
         <requestFocus />
     </TextView>
 
@@ -27,29 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/editText1"
         android:enabled="true"
-        android:onClick="recordButton"
-        android:text="Record" />
-
-    <Button
-        android:id="@+id/stop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/editText1"
-        android:layout_centerHorizontal="true"
-        android:enabled="false"
-        android:onClick="stopRecording"
-        android:text="Stop" />
-
-    <Button
-        android:id="@+id/listen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:onClick="listenRecord"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="14dp"
-        android:enabled="false"
-        
-        android:text="Listen" />
+        android:drawableBottom="@drawable/mic_icon"
+        android:text="Record" />   
 
 </RelativeLayout>

@@ -24,31 +24,29 @@ public final class R {
         public static final int ttong_over=0x7f02000a;
     }
     public static final class id {
-        public static final int blank=0x7f060010;
-        public static final int blank1=0x7f06000e;
-        public static final int blank2=0x7f06000c;
-        public static final int blank3=0x7f060013;
-        public static final int btnSpeak=0x7f060018;
-        public static final int btnStore=0x7f060019;
-        public static final int button1=0x7f060005;
-        public static final int button2=0x7f060006;
-        public static final int button3=0x7f060007;
-        public static final int button_start=0x7f060014;
+        public static final int blank=0x7f06000e;
+        public static final int blank1=0x7f06000c;
+        public static final int blank2=0x7f06000a;
+        public static final int blank3=0x7f060011;
+        public static final int btnSpeak=0x7f060016;
+        public static final int btnStore=0x7f060017;
+        public static final int button1=0x7f060003;
+        public static final int button2=0x7f060004;
+        public static final int button3=0x7f060005;
+        public static final int button_start=0x7f060012;
         public static final int editText1=0x7f060002;
-        public static final int framelayout=0x7f060008;
-        public static final int friendslistlist=0x7f060009;
-        public static final int image=0x7f06000d;
-        public static final int info_label=0x7f06000f;
-        public static final int listen=0x7f060004;
-        public static final int phone_label=0x7f060011;
-        public static final int phone_num=0x7f060012;
+        public static final int framelayout=0x7f060006;
+        public static final int friendslistlist=0x7f060007;
+        public static final int image=0x7f06000b;
+        public static final int info_label=0x7f06000d;
+        public static final int phone_label=0x7f06000f;
+        public static final int phone_num=0x7f060010;
         public static final int record=0x7f060001;
-        public static final int stop=0x7f060003;
-        public static final int stt=0x7f06000b;
-        public static final int sttbutton=0x7f060015;
-        public static final int stttv=0x7f060016;
-        public static final int tts=0x7f06000a;
-        public static final int txtText=0x7f060017;
+        public static final int stt=0x7f060009;
+        public static final int sttbutton=0x7f060013;
+        public static final int stttv=0x7f060014;
+        public static final int tts=0x7f060008;
+        public static final int txtText=0x7f060015;
         public static final int txtView=0x7f060000;
     }
     public static final class layout {
