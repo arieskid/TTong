@@ -29,8 +29,8 @@ public class Communication extends Activity{
 
 	AudioRecord recorder;
 
-	private int sampleRate = 16000 ; // 44100 for music
-	private int channelConfig = AudioFormat.CHANNEL_IN_MONO;    
+	private int sampleRate = 44100 ; // 44100 for music
+	private int channelConfig = AudioFormat.CHANNEL_IN_STEREO;
 	private int audioFormat = AudioFormat.ENCODING_PCM_16BIT;       
 	int minBufSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat);
 	private boolean status = true;
@@ -109,10 +109,7 @@ public class Communication extends Activity{
 	                    socket.send(packet);
 	                    System.out.println("MinBufferSize: " +minBufSize);
 
-
 	                }
-
-
 
 	            } catch(UnknownHostException e) {
 	                Log.e("VS", "UnknownHostException");
