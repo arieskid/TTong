@@ -1,14 +1,13 @@
 package com.example.tab;
 
-import android.app.ActionBar;
+import com.example.view.SignUpView;
+import com.example.voicerecognition.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.example.view.SignUpView;
-import com.example.voicerecognition.R;
 
 public class TtongTab extends Activity {
 

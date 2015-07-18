@@ -1,5 +1,10 @@
 package com.example.view;
 
+import java.util.HashMap;
+import java.util.Locale;
+
+import com.example.voicerecognition.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -9,10 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Locale;
-
-import com.example.voicerecognition.R;
 
 /**
  * Created by inhuh on 15. 6. 23..
