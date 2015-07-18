@@ -62,6 +62,10 @@
             android:name="com.example.voicerecognition.SttAndRecord">
         </activity>
         
+         <activity 
+            android:name="com.example.view.Communication">
+        </activity>
+        
     </application>
 
 </manifest>
