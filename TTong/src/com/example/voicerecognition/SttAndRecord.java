@@ -24,7 +24,9 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,8 +50,7 @@ public class SttAndRecord extends Activity {
 	String api_key = "AIzaSyBgnC5fljMTmCFeilkgLsOKBvvnx6CBS0M";
 
 	// Name of the sound file (.flac)
-	String fileName
-    = Environment.getExternalStorageDirectory()	+ "/recording.flac";
+	String fileName = Environment.getExternalStorageDirectory()	+ "/recording.flac";
 
 	// URL for Google API
 	String root = "https://www.google.com/speech-api/full-duplex/v1/";
@@ -160,64 +161,61 @@ public class SttAndRecord extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.stt_and_record);
 
+		mRecorder = new Recorder(this, mRecordingHandler);
 		txtView = (TextView) this.findViewById(R.id.txtView);
 		recordButton = (Button) this.findViewById(R.id.record);
-		stopButton = (Button) this.findViewById(R.id.stop);
-		stopButton.setEnabled(false);
-		listenButton = (Button) this.findViewById(R.id.listen);
-		listenButton.setEnabled(false);
+		recordButton.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {		// Start recording
+					mRecorder.start(fileName);
+					txtView.setText("");
+					Toast.makeText(getApplicationContext(), "Recording...", Toast.LENGTH_LONG).show();
+				} else if (event.getAction() == MotionEvent.ACTION_UP) {	// Stop recording
+					Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_LONG).show();
 
-		mRecorder = new Recorder(this, mRecordingHandler);
-
-	}
-
-	/***************************************************************************************************************
-	 * Method related to recording in FLAC file
-	 */
-
-	public void recordButton(View v) {
-
-		mRecorder.start(fileName);
-
-		txtView.setText("");
-		recordButton.setEnabled(false);
-		stopButton.setEnabled(true);
-		Toast.makeText(getApplicationContext(), "Recording...",
-				Toast.LENGTH_LONG).show();
+					sampleRate = mRecorder.mFLACRecorder.getSampleRate();
+					getTranscription(sampleRate);
+					mRecorder.stop();
+				}
+				return true;
+			}		
+		});
+		
 
 	}
 
-	/***************************************************************************************************************
-	 * Method that stops recording
-	 */
-
-	public void stopRecording(View v) {
-
-		Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_LONG)
-				.show();
-		recordButton.setEnabled(true);
-		listenButton.setEnabled(true);
-
-		sampleRate = mRecorder.mFLACRecorder.getSampleRate();
-		getTranscription(sampleRate);
-		mRecorder.stop();
-
-	}
-
-	/***************************************************************************************************************
-	 * Method that listens to recording
-	 */
-	public void listenRecord(View v) {
-		Context context = this;
-
-		FLACPlayer mFlacPlayer = new FLACPlayer(context, fileName);
-		mFlacPlayer.start();
-
-	}
-
-	/**************************************************************************************************************
-	 * Method related to Google Voice Recognition
-	 **/
+	
+//	/***************************************************************************************************************
+//	 * Method related to recording in FLAC file
+//	 */
+//
+//	public void recordButton(View v) {
+//		
+//		mRecorder.start(fileName);
+//
+//		txtView.setText("");
+//		recordButton.setEnabled(false);
+//		stopButton.setEnabled(true);
+//		Toast.makeText(getApplicationContext(), "Recording...", Toast.LENGTH_LONG).show();
+//
+//	}
+//
+//	/***************************************************************************************************************
+//	 * Method that stops recording
+//	 */
+//
+//	public void stopRecording(View v) {
+//
+//		Toast.makeText(getApplicationContext(), "Loading...", Toast.LENGTH_LONG).show();
+//		recordButton.setEnabled(true);
+//		listenButton.setEnabled(true);
+//
+//		sampleRate = mRecorder.mFLACRecorder.getSampleRate();
+//		getTranscription(sampleRate);
+//		mRecorder.stop();
+//
+//	}
 
 	public void getTranscription(int sampleRate) {
 
