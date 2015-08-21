@@ -1,5 +1,10 @@
 package com.example.view;
 
+import java.util.HashMap;
+import java.util.Locale;
+
+import com.example.ttong.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
@@ -9,10 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Locale;
-
-import com.example.voicerecognition.R;
 
 /**
  * Created by inhuh on 15. 6. 23..
@@ -51,7 +52,7 @@ public class TtsView extends Activity implements TextToSpeech.OnInitListener, Vi
                 speakOut();
                 //store it to a .m4a file
                 HashMap<String, String> myHashRender = new HashMap();
-                String destFileName = "/sdcard/Sounds/test111.m4a";
+                String destFileName = "/sdcard/test111.m4a";
                 myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, txtText.getText().toString());
                 tts.synthesizeToFile(txtText.getText().toString(), myHashRender, destFileName);
                 break;

@@ -1,6 +1,6 @@
 package com.example.tab;
 
-import com.example.voicerecognition.R;
+import com.example.ttong.R;
 
 import android.app.Activity;
 import android.os.Bundle;

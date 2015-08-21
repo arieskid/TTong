@@ -1,16 +1,16 @@
 package com.example.tab;
 
+import com.example.ttong.R;
+import com.example.view.Communication;
+import com.example.view.SttView;
+import com.example.view.TtsView;
+import com.example.voicerecognition.SttAndRecord;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-
-import com.example.view.SttView;
-import com.example.view.TtsView;
-import com.example.voicerecognition.R;
-import com.example.voicerecognition.SttAndRecord;
 
 public class DialTab extends Activity implements View.OnClickListener{
 
@@ -26,6 +26,9 @@ public class DialTab extends Activity implements View.OnClickListener{
         
         Button btn_recording = (Button)findViewById(R.id.button3);
         btn_recording.setOnClickListener(this);
+        
+        Button btn_communication = (Button)findViewById(R.id.button4);
+        btn_communication.setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +45,10 @@ public class DialTab extends Activity implements View.OnClickListener{
             case R.id.button3 :
             	Intent intent3 = new Intent(this, SttAndRecord.class);
             	startActivity(intent3);
+            	break;
+            case R.id.button4 :
+            	Intent intent4 = new Intent(this, Communication.class);
+            	startActivity(intent4);
         }
     }
 }

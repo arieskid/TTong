@@ -7,7 +7,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import com.example.voicerecognition.R;
+import com.example.ttong.R;
 
 import android.app.Activity;
 import android.media.AudioFormat;
@@ -21,6 +21,8 @@ import android.widget.Button;
 
 public class Communication extends Activity{
 	
+	private String ipAddr = "172.16.101.131"; 
+	
 	private Button startButton,stopButton;
 	
 	public byte[] buffer;
@@ -29,8 +31,8 @@ public class Communication extends Activity{
 
 	AudioRecord recorder;
 
-	private int sampleRate = 16000 ; // 44100 for music
-	private int channelConfig = AudioFormat.CHANNEL_IN_MONO;    
+	private int sampleRate = 44100 ; // 44100 for music
+	private int channelConfig = AudioFormat.CHANNEL_IN_STEREO;
 	private int audioFormat = AudioFormat.ENCODING_PCM_16BIT;       
 	int minBufSize = AudioRecord.getMinBufferSize(sampleRate, channelConfig, audioFormat);
 	private boolean status = true;
@@ -87,7 +89,7 @@ public class Communication extends Activity{
 	                Log.d("VS","Buffer created of size " + minBufSize);
 	                DatagramPacket packet;
 
-	                final InetAddress destination = InetAddress.getByName("192.168.1.5");
+	                final InetAddress destination = InetAddress.getByName(ipAddr);
 	                Log.d("VS", "Address retrieved");
 
 
@@ -109,10 +111,7 @@ public class Communication extends Activity{
 	                    socket.send(packet);
 	                    System.out.println("MinBufferSize: " +minBufSize);
 
-
 	                }
-
-
 
 	            } catch(UnknownHostException e) {
 	                Log.e("VS", "UnknownHostException");

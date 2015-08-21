@@ -10,7 +10,7 @@ import com.example.tab.ContactTab;
 import com.example.tab.DialTab;
 import com.example.tab.HistoryTab;
 import com.example.tab.TtongTab;
-import com.example.voicerecognition.R;
+import com.example.ttong.R;
 
 public class MainActivity extends TabActivity implements TabHost.OnTabChangeListener{
     TabHost tabHost;

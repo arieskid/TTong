@@ -4,7 +4,6 @@
     android:layout_height="fill_parent"
     android:orientation="vertical">
 
-
     <Button
         android:id="@+id/sttbutton"
         android:layout_width="wrap_content"

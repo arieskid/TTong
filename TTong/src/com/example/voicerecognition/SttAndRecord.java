@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import com.example.voicerecognition.R;
+import com.example.ttong.R;
 
 import android.app.Activity;
 import android.content.Context;
