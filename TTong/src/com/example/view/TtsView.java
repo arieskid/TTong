@@ -7,6 +7,7 @@ import com.example.ttong.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -52,7 +53,7 @@ public class TtsView extends Activity implements TextToSpeech.OnInitListener, Vi
                 speakOut();
                 //store it to a .m4a file
                 HashMap<String, String> myHashRender = new HashMap();
-                String destFileName = "/sdcard/test111.m4a";
+                String destFileName = Environment.getExternalStorageDirectory()	+"/test111.m4a";
                 myHashRender.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID, txtText.getText().toString());
                 tts.synthesizeToFile(txtText.getText().toString(), myHashRender, destFileName);
                 break;
