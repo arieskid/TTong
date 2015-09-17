@@ -1,5 +1,11 @@
 package com.example.view;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+import com.example.ttong.R;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,16 +13,9 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-
-import com.example.voicerecognition.R;
 
 /**
  * Created by inhuh on 2015. 5. 21..
