@@ -10,19 +10,23 @@ import android.widget.TextView;
 
 public class CallActivity extends Activity{
 
-	TextView tv;
-	Intent i;
+	Intent i;	
+	String name;
+	String phone;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_call);
 		
-		tv = (TextView) findViewById(R.id.callName);
+		TextView name_t = (TextView) findViewById(R.id.callName);
+		TextView phone_t = (TextView) findViewById(R.id.callPhone);
 		
 		i = getIntent();
-		String str = i.getExtras().getString("name");
-		tv.setText(str);
+		name = i.getExtras().getString("name");
+		phone = i.getExtras().getString("phone");
+		name_t.setText(name);
+		phone_t.setText(phone);
 	}
 
 }
