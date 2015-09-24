@@ -5,10 +5,42 @@
     android:gravity="center"
     android:orientation="vertical" >
     
-	<TextView
+	<ImageView
+	    android:id="@+id/img"
+	    android:layout_width="150dp"
+	    android:layout_height="150dp"
+	    android:scaleType="fitCenter"
+	    android:src="@drawable/caller"/>
+	
+	<TextView 
 	    android:id="@+id/callName"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
-	    android:text="test"/>
+	    android:layout_marginTop="10dp"
+	    android:textColor="@color/caller"
+	    android:textStyle="bold"
+	    android:textSize="20dp"
+	    android:text="DaHyeon"/>
+	
+	<TextView 
+	    android:id="@+id/callPhone"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="10dp"
+	    android:textColor="@color/caller"
+	    android:textStyle="bold"
+	    android:textSize="15dp"
+	    android:text="010-1234-5678"/>
+	
+	<Button 
+	    android:id="@+id/callStopBtn"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="100dp"
+	    android:padding="10dp"
+	    android:background="@color/callerBtn"
+	    android:textColor="@color/caller"
+	    android:textStyle="bold"
+	    android:text="Call Stop"/>
     
 </LinearLayout>

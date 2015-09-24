@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="caller">#607D8B</color>
+    <color name="callerBtn">#4DB6AC</color>
+    
+    <color name="Indigo1">#E8EAF6</color>
+    <color name="Indigo2">#C5CAE9</color>
+    <color name="Indigo3">#9FA8DA</color>
+    <color name="Indigo4">#7986CB</color>
+    <color name="Indigo5">#5C6BC0</color>
+    <color name="Indigo6">#3F51B5</color>
+    <color name="Indigo7">#3949AB</color>
+    <color name="Indigo8">#303F9F</color>
+    <color name="Indigo9">#283593</color>
+    <color name="Indigo10">#1A237E</color>
+    
+</resources>
