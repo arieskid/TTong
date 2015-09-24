@@ -10,7 +10,7 @@ import android.os.Handler;
 
 public class LoadingActivity extends Activity{
 
-	private final int delayTime = 1 * 1000; 	// wait for 1 second.
+	private final int delayTime = 2 * 1000; 	// wait for 2 second.
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

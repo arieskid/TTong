@@ -66,7 +66,7 @@ public class MainListViewAdapter extends BaseAdapter {
 			TextView name_t = (TextView) v.findViewById(R.id.name);
 			name_t.setText(name);
 			
-			TextView phone_t = (TextView) v.findViewById(R.id.phone);
+			TextView phone_t = (TextView) v.findViewById(R.id.phone_number);
 			phone_t.setText(phone);
 			
 			ImageButton btn = (ImageButton) v.findViewById(R.id.btn_call);
