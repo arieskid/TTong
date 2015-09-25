@@ -84,7 +84,6 @@ public class C03Activity extends Activity implements OnClickListener, OnInitList
         } else {
             tts.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
-
     }
 	
 	private RecognitionListener listener = new RecognitionListener() {
