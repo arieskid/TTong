@@ -19,6 +19,8 @@ public class ClientThread extends Thread{
 	Socket client;
 	Handler handler;
 	
+	int destState = 0;
+	
 	public ClientThread(Socket client, Handler handler){
 		this.handler = handler;
 		try{
@@ -62,9 +64,17 @@ public class ClientThread extends Thread{
 		try{
 			while(true){
 				msg = bufferReader.readLine();
+				
+				destState = Integer.valueOf(msg.substring(10, 11));
+				
+				// when receive call
 				if(msg.startsWith("StartCall ")){
 					// change the activity according to it and its destination's state
-					switch(Integer.valueOf(msg.substring(10, 11))){
+					
+					// 잔화받을래??
+					
+					
+					switch(destState){
 						case 0:
 							
 							break;
@@ -79,9 +89,10 @@ public class ClientThread extends Thread{
 					}
 					send("OkayCall ");
 				}
+				// when destination answer the call. - when i call and receiver answered.
 				else if(msg.startsWith("OkayCall ")){
 					// change the activity according to it and its destination's state
-					switch(Integer.valueOf(msg.substring(10, 11))){
+					switch(destState){
 						case 0:
 							
 							break;

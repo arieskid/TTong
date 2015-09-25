@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 				try{
 					client = new Socket(ip,port);
 
-					clientThread = new ClientThread(client,null);
+					clientThread = new ClientThread(client, null);
 					clientThread.start();
 				}catch(UnknownHostException e){
 					e.printStackTrace();
@@ -84,6 +84,8 @@ public class MainActivity extends Activity {
 		thread.start();
 		
 	}
+    
+    
     
     public void checkLogin(){
     	
@@ -157,6 +159,15 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
     
+	public static void ChangeCallActivity(){
+		if(flag == 0){
+			Intent i = new Intent(, CallAskActivity.class);
+			
+		}else{
+			
+		}
+	}
+	
 
 	private ArrayList<String> getXmlDataList(String filename, String str) { // 태그값 여러 개를 받아오기 위한 ArrayList<string>형 변수
 		String rss = SERVER_ADDRESS + "/result/";

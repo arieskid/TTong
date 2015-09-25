@@ -77,7 +77,7 @@ public class MainListViewAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					
-					((MainActivity)context).clientThread.send("dest "+phone);
+					((MainActivity)context).clientThread.sendDest(phone);
 					
 					Intent intent = new Intent(context, CallActivity.class);
 					intent.putExtra("name", name);
