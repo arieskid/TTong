@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.ttong.R;
 import com.ttong.activity.CallActivity;
+import com.ttong.activity.MainActivity;
 import com.ttong.model.UserData;
 
 import android.content.Context;
@@ -55,7 +56,7 @@ public class MainListViewAdapter extends BaseAdapter {
 		
 		if(v==null){
 			LayoutInflater layoutInflater = LayoutInflater.from(context);
-			v = layoutInflater.inflate(R.layout.cell_main_listview, null);
+			v = layoutInflater.inflate(R.layout.main_listview_cell, null);
 		}
 		
 		if(data != null){
@@ -75,6 +76,9 @@ public class MainListViewAdapter extends BaseAdapter {
 				@Override
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
+					
+					((MainActivity)context).clientThread.send("dest "+phone);
+					
 					Intent intent = new Intent(context, CallActivity.class);
 					intent.putExtra("name", name);
 					intent.putExtra("phone", phone);

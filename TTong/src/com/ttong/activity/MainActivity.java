@@ -1,8 +1,11 @@
 
 package com.ttong.activity;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.Socket;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -10,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserFactory;
 
 import com.example.ttong.R;
 import com.ttong.adapter.MainListViewAdapter;
+import com.ttong.commnuication.ClientThread;
 import com.ttong.model.UserData;
 
 import android.app.Activity;
@@ -33,7 +37,13 @@ public class MainActivity extends Activity {
 	ListView list;
 	ArrayList<UserData> data;
     MainListViewAdapter adapter;
-	
+        
+	static final String ip = "14.63.226.208";
+	static final int port = 8080;
+	Socket client;
+	public static ClientThread clientThread;
+    Thread thread;
+    	
 	public static SharedPreferences pref; 
 	SharedPreferences.Editor editor;
 	
@@ -53,6 +63,28 @@ public class MainActivity extends Activity {
         checkLogin();
     }	
 
+    public void connect(){
+    	
+		thread = new Thread(){
+			public void run(){
+				super.run();
+				
+				try{
+					client = new Socket(ip,port);
+
+					clientThread = new ClientThread(client,null);
+					clientThread.start();
+				}catch(UnknownHostException e){
+					e.printStackTrace();
+				}catch(IOException e){
+					e.printStackTrace();
+				}
+			}
+		};
+		thread.start();
+		
+	}
+    
     public void checkLogin(){
     	
     	if(!pref.getBoolean("Status", false)) {	// true=login, false=not login 
@@ -91,6 +123,9 @@ public class MainActivity extends Activity {
                                // Log.e("Error", e.getMessage());
                             } finally{
                                 dialog.dismiss();
+                                
+                                connect();
+                                
                                 adapter.setData(data);
                                 adapter.notifyDataSetChanged();
                             }
