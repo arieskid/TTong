@@ -69,7 +69,7 @@ public class LoginActivity extends Activity {
 								nameET.setText("");
 								phoneET.setText("");
 								
-								editor.putBoolean("Status", true);
+								editor.putBoolean("LoginStatus", true);
 								editor.putString("UserName", name);
 								editor.putString("UserPhone", phone);
 								editor.commit();

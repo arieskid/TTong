@@ -18,6 +18,7 @@ import com.ttong.model.UserData;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -65,14 +66,17 @@ public class MainActivity extends Activity {
 
     public void connect(){
     	
+    	final Context context = this;
+    	
 		thread = new Thread(){
+    		
 			public void run(){
 				super.run();
 				
 				try{
-					client = new Socket(ip,port);
-
+					client = new Socket(ip,port);			
 					clientThread = new ClientThread(client, null);
+					clientThread.setContext(context);
 					clientThread.start();
 				}catch(UnknownHostException e){
 					e.printStackTrace();
@@ -89,7 +93,7 @@ public class MainActivity extends Activity {
     
     public void checkLogin(){
     	
-    	if(!pref.getBoolean("Status", false)) {	// true=login, false=not login 
+    	if(!pref.getBoolean("LoginStatus", false)) {	// true=login, false=not login 
     		Intent i = new Intent(MainActivity.this, LoginActivity.class);
     		startActivity(i);
     	} else {
@@ -159,14 +163,6 @@ public class MainActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
     
-	public static void ChangeCallActivity(){
-		if(flag == 0){
-			Intent i = new Intent(, CallAskActivity.class);
-			
-		}else{
-			
-		}
-	}
 	
 
 	private ArrayList<String> getXmlDataList(String filename, String str) { // 태그값 여러 개를 받아오기 위한 ArrayList<string>형 변수

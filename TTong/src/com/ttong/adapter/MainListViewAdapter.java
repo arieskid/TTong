@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.example.ttong.R;
 import com.ttong.activity.CallActivity;
+import com.ttong.activity.CallLoadingActivity;
 import com.ttong.activity.MainActivity;
 import com.ttong.model.UserData;
 
@@ -70,6 +71,7 @@ public class MainListViewAdapter extends BaseAdapter {
 			TextView phone_t = (TextView) v.findViewById(R.id.phone_number);
 			phone_t.setText(phone);
 			
+			
 			ImageButton btn = (ImageButton) v.findViewById(R.id.btn_call);
 			btn.setOnClickListener(new OnClickListener() {
 				
@@ -77,9 +79,13 @@ public class MainListViewAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					
+					String myName = ((MainActivity)context).pref.getString("UserName", "no name");
+					String myPhone = ((MainActivity)context).pref.getString("UserPhone", "no phone number");
+					
+					((MainActivity)context).clientThread.sendMyInfo(myName, myPhone);;
 					((MainActivity)context).clientThread.sendDest(phone);
 					
-					Intent intent = new Intent(context, CallActivity.class);
+					Intent intent = new Intent(context, CallLoadingActivity.class);
 					intent.putExtra("name", name);
 					intent.putExtra("phone", phone);
 					context.startActivity(intent);
