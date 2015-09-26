@@ -3,6 +3,7 @@ package com.ttong.call_activity;
 import java.util.Locale;
 
 import com.example.ttong.R;
+import com.example.ttong.R.color;
 import com.ttong.activity.MainActivity;
 
 import android.app.Activity;
@@ -12,10 +13,15 @@ import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 // me : 2
@@ -24,8 +30,9 @@ import android.widget.Toast;
 // me기준 : send text, receive text->speech(tts)
 public class C22Activity extends Activity implements OnClickListener, OnInitListener {
 
-	ImageButton btn_send;
+	ImageButton btn_send, btn_stt;
 	EditText editText;
+	LinearLayout ll;
 	
 	TextToSpeech tts;
 	Handler handler;
@@ -33,13 +40,16 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.call_c22);
+		setContentView(R.layout.call_only_show_text);
 		
-		btn_send = (ImageButton)findViewById(R.id.btn_send);
-		editText = (EditText)findViewById(R.id.editText);
+		btn_stt = (ImageButton) findViewById(R.id.micBtn);
+		btn_send = (ImageButton) findViewById(R.id.sendBtn);
+		editText = (EditText) findViewById(R.id.textEt);
+		ll = (LinearLayout) findViewById(R.id.showText);
 		
-		tts = new TextToSpeech(this, this);
+		btn_stt.setEnabled(false);
 		btn_send.setOnClickListener(this);
+		tts = new TextToSpeech(this, this);
 		
 		handler = new Handler(){
 			public void handleMessage(Message msg){
@@ -64,9 +74,11 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 	
 	@Override
 	public void onClick(View v) {
-		if(v.getId()==R.id.btn_send){
-			MainActivity.clientThread.send(editText.getText().toString());
+		if(v.getId()==R.id.sendBtn){
+			String str = editText.getText().toString();
 			editText.setText("");
+			MainActivity.clientThread.send(str);
+			showText(str);
 		}
 	}
 	
@@ -102,5 +114,19 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
         }
 		
 		super.onDestroy();
+	}
+	
+	public void showText(String str){
+		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
+		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());
+		
+		TextView tv = new TextView(this);
+		tv.setText(str);
+		tv.setTextColor(color.Indigo8);
+		tv.setPadding(0, dp_5, dp_10, dp_5);
+		
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
+		tv.setLayoutParams(params);
+		ll.addView(tv);
 	}
 }

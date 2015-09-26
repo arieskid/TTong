@@ -131,7 +131,7 @@ public class MainActivity extends Activity {
                             } finally{
                                 dialog.dismiss();
                                 
-                                connect();
+                                connect(); // 통신 서버
                                 
                                 adapter.setData(data);
                                 adapter.notifyDataSetChanged();

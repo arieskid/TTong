@@ -20,6 +20,8 @@ import android.widget.ImageButton;
 
 public class CallAskActivity extends Activity implements OnClickListener{
 
+	// 만약 내가 call ok 한 사이에 상대방이 전화 끊으면??
+	
 	ImageButton btn_ok;
 	ImageButton btn_no;
 	Intent i;

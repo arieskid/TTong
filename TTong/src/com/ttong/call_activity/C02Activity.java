@@ -6,12 +6,15 @@ import com.example.ttong.R;
 import com.ttong.activity.MainActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,19 +23,33 @@ import android.widget.Toast;
 // me : 0(not disabled)
 // dest : 2(언어장애인)
 
-// me 기준 : send voice streaming, receive text->speech(tts)
-public class C02Activity extends Activity implements OnInitListener {
-
-	// voice streaming하는 것 같은 xml이 필요. = same C00 xml
+// me 기준 : send voice streaming, receive text->speech(tts)		====>>> same C00
+public class C02Activity extends Activity implements OnInitListener, OnClickListener {
 	
 	TextToSpeech tts;
 	Handler handler;
 	
+	TextView nameTv, phoneTv;
+	Button btn;
+	String name, phone;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.call_c02);
+		setContentView(R.layout.call_vs);
 				
+		nameTv = (TextView) findViewById(R.id.callName);
+		phoneTv = (TextView) findViewById(R.id.callPhone);
+		btn = (Button) findViewById(R.id.callStopBtn);
+		
+		Intent i = getIntent();
+		name = i.getExtras().getString("destName");
+		phone = i.getExtras().getString("destPhone");
+		
+		nameTv.setText(name);
+		phoneTv.setText(phone);
+		btn.setOnClickListener(this);
+		
 		tts = new TextToSpeech(this, this);
 		
 		handler = new Handler(){
@@ -90,5 +107,14 @@ public class C02Activity extends Activity implements OnInitListener {
         }
 		
 		super.onDestroy();
+	}
+
+	@Override
+	public void onClick(View v) {
+///////////////////////////// 연진이가 확인할 부분 - 서버에게 통화 종료 요청.
+		MainActivity.clientThread.send("StopCall ");
+		
+		Intent i = new Intent(this, MainActivity.class);
+		startActivity(i);
 	}
 }

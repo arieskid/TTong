@@ -34,7 +34,7 @@ public class SettingActivity extends Activity {
 		setContentView(R.layout.activity_setting);
 
 		name = (TextView) findViewById(R.id.userName);
-		phone = (TextView) findViewById(R.id.userName);
+		phone = (TextView) findViewById(R.id.userPhone);
 		hearDisable = (Switch) findViewById(R.id.hearDisable);
 		speakDisable = (Switch) findViewById(R.id.speakDisable);
 		logoutBtn = (Button) findViewById(R.id.logoutBtn);

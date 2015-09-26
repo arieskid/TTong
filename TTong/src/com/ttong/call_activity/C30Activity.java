@@ -1,16 +1,21 @@
 package com.ttong.call_activity;
 
 import com.example.ttong.R;
+import com.example.ttong.R.color;
 import com.ttong.activity.MainActivity;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 // me : 3
@@ -19,41 +24,74 @@ import android.widget.TextView;
 // me기준 : send text, receive text
 public class C30Activity extends Activity implements OnClickListener {
 
-	ImageButton btn_send;
+	LinearLayout showText;
+	ImageButton btn_send, btn_stt;
 	EditText editText;
-	TextView textView;
 	
 	Handler handler;
 	
 	@Override
-	public void onClick(View v) {
+	public void onCreate(Bundle savedInstanceState){
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.call_c30);
+		setContentView(R.layout.call_edit_text);
 		
-		btn_send = (ImageButton)findViewById(R.id.btn_send);
-		editText = (EditText)findViewById(R.id.editText);
-		textView = (TextView)findViewById();
+		btn_stt = (ImageButton) findViewById(R.id.micBtn);
+		btn_send = (ImageButton) findViewById(R.id.sendBtn);
+		editText = (EditText) findViewById(R.id.textEt);
+		showText = (LinearLayout) findViewById(R.id.showText);
+		
+		btn_stt.setEnabled(false);
+		btn_send.setOnClickListener(this);
 		
 		handler = new Handler(){
 			public void handleMessage(Message msg){
 				super.handleMessage(msg);
 				Bundle bundle = msg.getData();
-				textView.append(bundle.getString("msg")+"\n");
+				String str = bundle.getString("msg")+"\n";
+				//textView.append();
+				showText(str, 1);
 			}
 		};
 		
 		// test!!!!!!!
 		MainActivity.clientThread.changeHandler(handler);
-		
-		btn_send.setOnClickListener(this);
 	}
 
 	@Override
 	public void onClick(View v) {
-		if(v.getId()==R.id.btn_send){
-			MainActivity.clientThread.send(editText.getText().toString());
+		if(v.getId()==R.id.sendBtn){
+			String str = editText.getText().toString();
 			editText.setText("");
+			MainActivity.clientThread.send(str);
+			showText(str, 0);
 		}	
+	}
+	
+public void showText(String str, int flag){
+		
+		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
+		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());
+		
+		TextView tv = new TextView(this);
+		tv.setText(str);
+		tv.setTextColor(color.Indigo8);
+		LinearLayout.LayoutParams params = null;
+		
+		// send text
+		if(flag == 0){
+			tv.setPadding(0, dp_5, dp_10, dp_5);
+			params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, Gravity.RIGHT); 
+		}
+		// receive text
+		else if(flag == 1){
+			tv.setPadding(dp_10, dp_5, 0, dp_5);
+			params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, Gravity.LEFT);
+		}
+		
+		if(params != null)
+			tv.setLayoutParams(params);
+		
+		showText.addView(tv);
 	}
 }
