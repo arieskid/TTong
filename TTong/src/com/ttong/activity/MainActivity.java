@@ -41,6 +41,7 @@ public class MainActivity extends Activity {
         
 	static final String ip = "14.63.226.208";
 	static final int port = 8080;
+	
 	Socket client;
 	public static ClientThread clientThread;
     Thread thread;
@@ -157,7 +158,11 @@ public class MainActivity extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
-			Toast.makeText(this, "setting", Toast.LENGTH_SHORT).show();
+		
+			Intent i = new Intent(this, SettingActivity.class);
+			i.putExtra("userName", pref.getString("UserName", "no name"));
+			i.putExtra("userPhone", pref.getString("UserPhone", "no phone number"));
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

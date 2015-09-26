@@ -3,13 +3,14 @@ package com.ttong.adapter;
 import java.util.ArrayList;
 
 import com.example.ttong.R;
-import com.ttong.activity.CallActivity;
 import com.ttong.activity.CallLoadingActivity;
 import com.ttong.activity.MainActivity;
+import com.ttong.commnuication.ClientThread;
 import com.ttong.model.UserData;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,7 +19,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainListViewAdapter extends BaseAdapter {
 
@@ -79,11 +79,13 @@ public class MainListViewAdapter extends BaseAdapter {
 				public void onClick(View v) {
 					// TODO Auto-generated method stub
 					
-					String myName = ((MainActivity)context).pref.getString("UserName", "no name");
-					String myPhone = ((MainActivity)context).pref.getString("UserPhone", "no phone number");
+					SharedPreferences preference = ((MainActivity)context).pref;
+					String myName = preference.getString("UserName", "no name");
+					String myPhone = preference.getString("UserPhone", "no phone number");
 					
-					((MainActivity)context).clientThread.sendMyInfo(myName, myPhone);;
-					((MainActivity)context).clientThread.sendDest(phone);
+					ClientThread ct = ((MainActivity)context).clientThread;
+					ct.sendMyInfo(myName, myPhone);;
+					ct.sendDest(phone);
 					
 					Intent intent = new Intent(context, CallLoadingActivity.class);
 					intent.putExtra("name", name);

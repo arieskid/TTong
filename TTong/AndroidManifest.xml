@@ -19,12 +19,11 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppBaseTheme" >
-        
         <activity
             android:name="com.ttong.activity.LoadingActivity"
-            android:theme="@android:style/Theme.NoTitleBar"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,61 +31,21 @@
             </intent-filter>
         </activity>
         
-        <activity 
-       	    android:name="com.ttong.activity.MainActivity">
-       	</activity>
-       	
-        <activity 
-       	    android:name="com.ttong.activity.LoginActivity">
-       	</activity>
-       	
-        <activity 
-       	    android:name="com.ttong.activity.SettingActivity">
-       	</activity>
-       	
-        <activity 
-       	    android:name="com.ttong.activity.CallActivity">
-       	</activity>
-       	
-        <activity 
-       	    android:name="com.ttong.activity.CallTTSActivity">
-       	</activity>
-            
-            
-       	<activity 
-       	    android:name="com.example.tab.DialTab">
-       	</activity>
-       	
-        <activity 
-            android:name="com.example.tab.TtongTab">
-        </activity>
+        <activity android:name="com.ttong.activity.MainActivity" />
+        <activity android:name="com.ttong.activity.LoginActivity" />
+        <activity android:name="com.ttong.activity.SettingActivity" />
+        <activity android:name="com.ttong.activity.CallAskActivity" />
+        <activity android:name="com.ttong.activity.CallLoadingActivity" />
+        <activity android:name="com.ttong.activity.C00Activity" />
+        <activity android:name="com.ttong.activity.C01Activity" />
+        <activity android:name="com.ttong.activity.C02Activity" />
+        <activity android:name="com.ttong.activity.C03Activity" />
+        <activity android:name="com.ttong.activity.C10Activity" />
+        <activity android:name="com.ttong.activity.C20Activity" />
+        <activity android:name="com.ttong.activity.C30Activity" />
+        <activity android:name="com.ttong.activity.C11Activity" />
+        <activity android:name="com.ttong.activity.C22Activity" />
         
-        <activity 
-            android:name="com.example.tab.HistoryTab">
-        </activity>
-        
-        <activity 
-            android:name="com.example.tab.ContactTab">
-        </activity>
-        
-        
-        <activity 
-            android:name="com.example.view.SttView">
-        </activity>
-        
-        <activity 
-            android:name="com.example.view.TtsView">
-        </activity>
-        
-        <activity 
-            android:name="com.example.view.Communication">
-        </activity>
-        
-        <activity 
-            android:name="com.voice.recognition.SttAndRecord">
-        </activity>
-        
-         
     </application>
 
 </manifest>

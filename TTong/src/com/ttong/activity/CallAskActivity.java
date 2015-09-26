@@ -49,7 +49,7 @@ public class CallAskActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 
-		int myState = MainActivity.pref.getInt("myState", 0);
+		int myState = MainActivity.pref.getInt("userState", 0);
 		
 		Intent i;
 		

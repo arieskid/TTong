@@ -23,6 +23,7 @@ import android.widget.Toast;
 public class LoginActivity extends Activity {
 
 	private final String SERVER_ADDRESS = "http://14.63.226.208";
+	
 	EditText nameET, phoneET;
 	Button btn;
 
