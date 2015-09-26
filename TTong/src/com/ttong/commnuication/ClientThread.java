@@ -110,7 +110,7 @@ public class ClientThread extends Thread{
 			while(true){
 				msg = bufferReader.readLine();
 
-				cha();
+				
 
 				// when receive call
 				if(msg.startsWith("StartCall ")){
