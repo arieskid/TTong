@@ -7,7 +7,6 @@ import java.net.URLEncoder;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
-import com.example.registration.Registration_Form;
 import com.example.ttong.R;
 import com.ttong.model.UserState;
 

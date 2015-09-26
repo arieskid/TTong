@@ -41,7 +41,7 @@ public class C01Activity extends Activity implements OnClickListener {
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.call_only_show_text);
+		setContentView(R.layout.call_edit_text);
 		
 		btn_stt = (ImageButton) findViewById(R.id.micBtn);
 		btn_send = (ImageButton) findViewById(R.id.sendBtn);

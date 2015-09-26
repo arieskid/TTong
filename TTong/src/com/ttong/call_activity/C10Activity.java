@@ -29,7 +29,7 @@ public class C10Activity extends Activity{
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.call_edit_text);
+		setContentView(R.layout.call_only_text);
 		
 		showText = (LinearLayout) findViewById(R.id.showText);
 		
