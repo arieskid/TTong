@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="ID"
+            android:textStyle="bold" 
             android:textColor="@color/Indigo5" />
 
         <EditText
@@ -48,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="PW"
+            android:textStyle="bold"
             android:textColor="@color/Indigo5" />
 
         <EditText

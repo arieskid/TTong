@@ -7,6 +7,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
@@ -17,6 +20,7 @@ public class SettingActivity extends Activity {
 
 	TextView name, phone;
 	Switch hearDisable, speakDisable;
+	Button logoutBtn;
 	
 	Intent i;
 	String userName, userPhone;
@@ -33,6 +37,7 @@ public class SettingActivity extends Activity {
 		phone = (TextView) findViewById(R.id.userName);
 		hearDisable = (Switch) findViewById(R.id.hearDisable);
 		speakDisable = (Switch) findViewById(R.id.speakDisable);
+		logoutBtn = (Button) findViewById(R.id.logoutBtn);
 		
 		i = getIntent();
 		userName = i.getExtras().getString("userName");
@@ -64,6 +69,19 @@ public class SettingActivity extends Activity {
 				}
 				updateUserStateToPref();
 				sendUserStateToDB();
+			}
+		});
+		
+		logoutBtn.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				SharedPreferences preference = MainActivity.pref;
+				SharedPreferences.Editor editor = preference.edit();
+				
+				editor.putBoolean("LoginStatus", false);
+				editor.putString("UserName", "no name");
+				editor.putString("UserPhone", "no phone number");
+				editor.commit();
 			}
 		});
 	}
