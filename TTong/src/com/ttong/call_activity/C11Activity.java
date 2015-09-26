@@ -16,6 +16,8 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -73,6 +75,23 @@ public class C11Activity extends Activity implements OnClickListener {
 		
 		btn_send.setOnClickListener(this);
         btn_stt.setOnClickListener(this);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.call, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+////////////////////////// 연진이한테 물어보기!! 
+		int id = item.getItemId();
+		if (id == R.id.action_call_stop) {
+			MainActivity.clientThread.send("StopCall ");
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	private RecognitionListener listener = new RecognitionListener() {

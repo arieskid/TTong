@@ -11,6 +11,8 @@ import android.os.Message;
 import android.speech.tts.TextToSpeech;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -45,6 +47,23 @@ public class C10Activity extends Activity{
 		
 		// test!!!!!!!
 		MainActivity.clientThread.changeHandler(handler);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.call, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+////////////////////////// 연진이한테 물어보기!! 
+		int id = item.getItemId();
+		if (id == R.id.action_call_stop) {
+			MainActivity.clientThread.send("StopCall ");
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 	public void showText(String str){

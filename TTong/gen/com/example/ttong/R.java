@@ -26,20 +26,22 @@ public final class R {
     }
     public static final class drawable {
         public static final int btn_call=0x7f020000;
-        public static final int ic_caller=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int ic_mic=0x7f020003;
-        public static final int ic_mic_disable=0x7f020004;
-        public static final int ic_send=0x7f020005;
-        public static final int ic_setting=0x7f020006;
-        public static final int ic_user_state_0=0x7f020007;
-        public static final int ic_user_state_1=0x7f020008;
-        public static final int ic_user_state_2=0x7f020009;
-        public static final int ic_user_state_3=0x7f02000a;
-        public static final int logo_loading=0x7f02000b;
+        public static final int ic_call_stop=0x7f020001;
+        public static final int ic_caller=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int ic_mic=0x7f020004;
+        public static final int ic_mic_disable=0x7f020005;
+        public static final int ic_send=0x7f020006;
+        public static final int ic_setting=0x7f020007;
+        public static final int ic_user_state_0=0x7f020008;
+        public static final int ic_user_state_1=0x7f020009;
+        public static final int ic_user_state_2=0x7f02000a;
+        public static final int ic_user_state_3=0x7f02000b;
+        public static final int logo_loading=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f080013;
+        public static final int action_call_stop=0x7f080013;
+        public static final int action_settings=0x7f080014;
         public static final int btn_call=0x7f080012;
         public static final int callName=0x7f08000d;
         public static final int callPhone=0x7f08000e;
@@ -71,7 +73,8 @@ public final class R {
         public static final int main_listview_cell=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f070000;
+        public static final int call=0x7f070000;
+        public static final int main=0x7f070001;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;

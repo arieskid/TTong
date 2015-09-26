@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
 	public static SharedPreferences pref; 
 	SharedPreferences.Editor editor;
 	
-	
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -65,7 +65,15 @@ public class MainActivity extends Activity {
         checkLogin();
     }	
 
-    public void connect(){
+    @Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+
+
+
+	public void connect(){
     	
     	final Context context = this;
     	

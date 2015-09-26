@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -68,7 +70,24 @@ public class C30Activity extends Activity implements OnClickListener {
 		}	
 	}
 	
-public void showText(String str, int flag){
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.call, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+////////////////////////// 연진이한테 물어보기!! 
+		int id = item.getItemId();
+		if (id == R.id.action_call_stop) {
+			MainActivity.clientThread.send("StopCall ");
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
+	public void showText(String str, int flag){
 		
 		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
 		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());

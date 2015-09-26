@@ -20,6 +20,8 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
@@ -187,6 +189,23 @@ public class C03Activity extends Activity implements OnClickListener, OnInitList
             Toast.makeText(this, "TTS Initilization Failed", Toast.LENGTH_LONG).show();
             Log.e("TTS", "Initilization Failed");
         }
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.call, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+////////////////////////// 연진이한테 물어보기!! 
+		int id = item.getItemId();
+		if (id == R.id.action_call_stop) {
+			MainActivity.clientThread.send("StopCall ");
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 
 	@Override
