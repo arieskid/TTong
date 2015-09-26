@@ -14,17 +14,20 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
 	private final String SERVER_ADDRESS = "http://14.63.226.208";
 	
-	EditText nameET, phoneET;
+	EditText nameET;
+	TextView phoneET;
 	Button btn;
 
 	@Override
@@ -35,8 +38,12 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		
 		nameET = (EditText) findViewById(R.id.name);
-		phoneET = (EditText) findViewById(R.id.phone);
+		phoneET = (TextView) findViewById(R.id.phone);
 		btn = (Button) findViewById(R.id.okBtn);
+		
+		TelephonyManager telManager = (TelephonyManager)getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+		phoneET.setText(telManager.getLine1Number()); 
+		
 		btn.setOnClickListener(new View.OnClickListener() { // 입력 버튼을 눌렀을 때
 
 			public void onClick(View v) {				
