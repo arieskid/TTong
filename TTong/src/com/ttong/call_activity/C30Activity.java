@@ -47,6 +47,8 @@ public class C30Activity extends Activity implements OnClickListener {
 		btn_stt.setEnabled(false);
 		btn_send.setOnClickListener(this);
 		
+		MainActivity.clientThread.setContext(this);
+		
 		handler = new Handler(){
 			public void handleMessage(Message msg){
 				super.handleMessage(msg);

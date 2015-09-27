@@ -63,45 +63,51 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		String myPhone = MainActivity.pref.getString("UserPhone", "no phone number");
 		
 		Intent i = null;
-		Log.d("***", "test myState : "+String.valueOf(myState));
-		Log.d("***", "test destState : "+String.valueOf(destState));
+		Log.d("***", "test callask myState : "+String.valueOf(myState));
+		Log.d("***", "test callask destState : "+String.valueOf(destState));
 		
 		// ok button
 		if(v.getId() == R.id.callAgree){
 			switch(destState + (myState*10)){
 				case 0:
 					i = new Intent(this, C00Activity.class);
+					Log.d("****", "test callask : 0");
 					break;
 				case 1:
 					i = new Intent(this, C01Activity.class);
+					Log.d("****", "test callask : 1");
 					break;
 				case 2:
 					i = new Intent(this, C02Activity.class);
+					Log.d("****", "test callask : 2");
 					break;
 				case 3:
 					i = new Intent(this, C03Activity.class);
+					Log.d("****", "test callask : 3");
 					break;
 				case 10: case 12:
 					i = new Intent(this, C10Activity.class);
+					Log.d("****", "test callask : 10");
 					break;
 				case 11: case 13:
 					i = new Intent(this, C11Activity.class);
+					Log.d("****", "test callask : 11");
 					break;
 				case 20: case 21:
 					i = new Intent(this, C20Activity.class);
+					Log.d("****", "test callask : 20");
 					break;
 				case 22: case 23:
 					i = new Intent(this, C22Activity.class);
+					Log.d("****", "test callask :22");
 					break;
 				case 30: case 31: case 32: case 33:
-					Log.d("****", "test : 0");
 					i = new Intent(this, C30Activity.class);
+					Log.d("****", "test callask : 30");
 					break;
 			}
 			
-			Log.d("****", "test : 1");
 			MainActivity.clientThread.send("OkayCall "+"/"+myState+"/"+myName+"/"+myPhone);
-			Log.d("****", "test : 2");
 			i.putExtra("destName", destName);
 			i.putExtra("destPhone", destPhone);
 			startActivity(i);

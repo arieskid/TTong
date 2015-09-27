@@ -82,10 +82,11 @@ public class MainListViewAdapter extends BaseAdapter {
 					SharedPreferences preference = ((MainActivity)context).pref;
 					String myName = preference.getString("UserName", "no name");
 					String myPhone = preference.getString("UserPhone", "no phone number");
+					int myState = preference.getInt("userState", 0);
 					
 					ClientThread ct = ((MainActivity)context).clientThread;
 					ct.sendDest(phone);
-					ct.sendMyInfo(myName, myPhone);
+					ct.sendMyInfo(myName, myPhone, myState);
 					
 					Intent intent = new Intent(context, CallLoadingActivity.class);
 					intent.putExtra("name", name);

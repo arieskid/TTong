@@ -62,11 +62,13 @@ public class ClientThread extends Thread{
 	}
 
 	//send my Information
-	public void sendMyInfo(String myName, String myPhone){
+	public void sendMyInfo(String myName, String myPhone, int myState){
 		try{
 			bufferWriter.write("MyName "+myName+"\n");
 			bufferWriter.flush();
 			bufferWriter.write("MyPhone "+myPhone+"\n");
+			bufferWriter.flush();
+			bufferWriter.write("MyState "+myState+"\n");
 			bufferWriter.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,13 +115,13 @@ public class ClientThread extends Thread{
 				// when receive call
 				if(msg.startsWith("StartCall ")){
 					// change the activity according to it and its destination's state
-					Log.d("****", "test msg : "+msg);
 					String[] arr = msg.split("/");
 					//destState = Integer.valueOf(msg.substring(10, 11));
-					Log.d("***", "test : "+arr[0]+"/"+arr[1]+"/"+arr[2]+"/"+arr[3]);
 					destState = Integer.valueOf(arr[1]);
 					destName = arr[2];
 					destPhone = arr[3];
+					
+					Log.d("****", "test ct msg : "+msg);
 
 					// 전화받을래??
 					Intent i = new Intent(context, CallAskActivity.class);
@@ -132,61 +134,63 @@ public class ClientThread extends Thread{
 				else if(msg.startsWith("OkayCall ")){
 					// change the activity according to it and its destination's state
 					
-					Log.d("****", "test msg : "+msg);
-					
 					String[] arr = msg.split("/");
 					//destState = Integer.valueOf(msg.substring(10, 11));
 					destState = Integer.valueOf(arr[1]);
 					destName = arr[2];
 					destPhone = arr[3];
-					
-					Log.d("***", "test : "+arr[0]+"/"+arr[1]+"/"+arr[2]+"/"+arr[3]);
-
 					Intent i = null;
 					int myState = MainActivity.pref.getInt("userState", 0);
 					
-					Log.d("***", "test my : "+String.valueOf(myState));
-					Log.d("***", "test dest : "+String.valueOf(destState));
+					Log.d("***", "test ct my : "+String.valueOf(myState));
+					Log.d("***", "test ct dest : "+String.valueOf(destState));
 
 					switch(destState + (myState*10)){
 					case 0:
 						i = new Intent(context, C00Activity.class);
+						Log.d("****", "test ct : 0");
 						break;
 
 					case 1:
 						i = new Intent(context, C01Activity.class);
+						Log.d("****", "test ct : 1");
 						break;
 
 					case 2:
 						i = new Intent(context, C02Activity.class);
+						Log.d("****", "test ct : 2");
 						break;
 
 					case 3:
 						i = new Intent(context, C03Activity.class);
+						Log.d("****", "test ct : 3");
 						break;
 
 					case 10: case 12:
 						i = new Intent(context, C10Activity.class);
+						Log.d("****", "test ct : 10");
 						break;
 
 					case 11: case 13:
 						i = new Intent(context, C11Activity.class);
+						Log.d("****", "test ct : 11");
 						break;
 
 					case 20: case 21:
 						i = new Intent(context, C20Activity.class);
+						Log.d("****", "test ct : 20");
 						break;
 
 					case 22: case 23:
 						i = new Intent(context, C22Activity.class);
+						Log.d("****", "test ct : 22");
 						break;
 
 					case 30: case 31: case 32: case 33:
 						i = new Intent(context, C30Activity.class);
-						Log.d("***", "test : into switch");
+						Log.d("****", "test ct : 30");
 						break;
 					}
-					Log.d("***", "test : out switch");
 					
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
