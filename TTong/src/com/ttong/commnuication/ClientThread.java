@@ -143,9 +143,10 @@ public class ClientThread extends Thread{
 					Log.d("***", "test : "+arr[0]+"/"+arr[1]+"/"+arr[2]+"/"+arr[3]);
 
 					Intent i = null;
-					int myState = MainActivity.pref.getInt("myState", 0);
+					int myState = MainActivity.pref.getInt("userState", 0);
 					
-					Log.d("***", "test : "+String.valueOf(myState));
+					Log.d("***", "test my : "+String.valueOf(myState));
+					Log.d("***", "test dest : "+String.valueOf(destState));
 
 					switch(destState + (myState*10)){
 					case 0:

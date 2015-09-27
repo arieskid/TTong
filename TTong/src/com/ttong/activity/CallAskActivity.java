@@ -27,6 +27,7 @@ public class CallAskActivity extends Activity implements OnClickListener{
 	ImageButton btn_ok, btn_no;
 	TextView name, phone;
 	
+	
 	int destState;
 	String destPhone;
 	String destName;
@@ -57,6 +58,9 @@ public class CallAskActivity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		int myState = MainActivity.pref.getInt("userState", 0);
+
+		String myName = MainActivity.pref.getString("UserName", "no name");
+		String myPhone = MainActivity.pref.getString("UserPhone", "no phone number");
 		
 		Intent i = null;
 		Log.d("***", "test myState : "+String.valueOf(myState));
@@ -96,7 +100,7 @@ public class CallAskActivity extends Activity implements OnClickListener{
 			}
 			
 			Log.d("****", "test : 1");
-			MainActivity.clientThread.send("OkayCall ");
+			MainActivity.clientThread.send("OkayCall "+"/"+myState+"/"+myName+"/"+myPhone);
 			Log.d("****", "test : 2");
 			i.putExtra("destName", destName);
 			i.putExtra("destPhone", destPhone);
