@@ -15,25 +15,31 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 public class CallLoadingActivity extends Activity{
 
+	TextView name, phone;
+	
 	String destName;
 	String destPhone;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setC - xml;
+		setContentView(R.layout.activity_call_loading);
+		
+		MainActivity.clientThread.setContext(this);
 
-		//MainActivity.clientThread.setContext(this);
+		name = (TextView) findViewById(R.id.receiver);
+		phone = (TextView) findViewById(R.id.receiverPhone);
+		
 		Intent intent = getIntent();
 		destName = intent.getExtras().getString("name");
 		destPhone = intent.getExtras().getString("phone");
 
-		MainActivity.clientThread.setContext(this);
+		name.setText(destName);
+		phone.setText(destPhone);
 	}
-
 
 }

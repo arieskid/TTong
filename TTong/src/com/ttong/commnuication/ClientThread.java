@@ -93,15 +93,14 @@ public class ClientThread extends Thread{
 		}
 	}
 
-	public void changeActivity(String msg){
-
-		if(msg.startsWith("StartCall ")){
-
-		} else if(msg.startsWith("OkayCall ")){
-
-		}
-	}
-
+//	public void changeActivity(String msg){
+//
+//		if(msg.startsWith("StartCall ")){
+//
+//		} else if(msg.startsWith("OkayCall ")){
+//
+//		}
+//	}
 
 	//諛쏄린
 	public String receive(){
@@ -109,8 +108,6 @@ public class ClientThread extends Thread{
 		try{
 			while(true){
 				msg = bufferReader.readLine();
-
-				
 
 				// when receive call
 				if(msg.startsWith("StartCall ")){
@@ -137,7 +134,7 @@ public class ClientThread extends Thread{
 					destName = arr[2];
 					destPhone = arr[3];
 
-					Intent i;
+					Intent i = null;
 					int myState = MainActivity.pref.getInt("myState", 0);
 
 					switch(destState + (myState*10)){
@@ -176,12 +173,11 @@ public class ClientThread extends Thread{
 					case 30: case 31: case 32: case 33:
 						i = new Intent(context, C30Activity.class);
 						break;
-
-						i.putExtra("destName", destName);
-						i.putExtra("destPhone", destPhone);
-						context.startActivity(i);
-
 					}
+					
+					i.putExtra("destName", destName);
+					i.putExtra("destPhone", destPhone);
+					context.startActivity(i);
 				}
 				else if(msg.startsWith("StopCall ")){
 					// return main activity

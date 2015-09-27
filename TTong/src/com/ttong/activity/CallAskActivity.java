@@ -22,9 +22,7 @@ public class CallAskActivity extends Activity implements OnClickListener{
 
 	// 만약 내가 call ok 한 사이에 상대방이 전화 끊으면??
 	
-	ImageButton btn_ok;
-	ImageButton btn_no;
-	Intent i;
+	ImageButton btn_ok, btn_no;
 	
 	int destState;
 	String destPhone;
@@ -34,15 +32,15 @@ public class CallAskActivity extends Activity implements OnClickListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView();
+		setContentView(R.layout.activity_call_ask);
 		
-		i = getIntent();
+		Intent i = getIntent();
 		destState = i.getExtras().getInt("destState");
 		destPhone = i.getExtras().getString("destPhone");
 		destName = i.getExtras().getString("destName");
 
-		btn_ok = (ImageButton) findViewById(R.id.);
-		btn_no = (ImageButton) findViewById(R.id.);
+		btn_ok = (ImageButton) findViewById(R.id.callAgree);
+		btn_no = (ImageButton) findViewById(R.id.callReject);
 		btn_ok.setOnClickListener(this);
 		btn_no.setOnClickListener(this);
 	}
@@ -50,13 +48,12 @@ public class CallAskActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-
 		int myState = MainActivity.pref.getInt("userState", 0);
 		
-		Intent i;
+		Intent i = null;
 		
 		// ok button
-		if(v == R.id.){
+		if(v.getId() == R.id.callAgree){
 			switch(destState + (myState*10)){
 				case 0:
 					i = new Intent(this, C00Activity.class);
@@ -93,8 +90,9 @@ public class CallAskActivity extends Activity implements OnClickListener{
 			
 			MainActivity.clientThread.send("OkayCall ");
 		} 
+		
 		// no button
-		else if(v == R.id.){
+		else if(v.getId() == R.id.callReject){
 			MainActivity.clientThread.send("StopCall ");
 		}
 	}
