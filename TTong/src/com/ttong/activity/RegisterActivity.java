@@ -43,7 +43,11 @@ public class RegisterActivity extends Activity {
 		
 		TelephonyManager telManager = (TelephonyManager)getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
 		String phoneNum = telManager.getLine1Number();
-		phoneET.setText(phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11));
+		
+		if(phoneNum == null){
+			phoneET.setText("123-4567-9123");
+		}
+		else phoneET.setText(phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11));
 		
 		btn.setOnClickListener(new View.OnClickListener() { // 입력 버튼을 눌렀을 때
 
@@ -97,7 +101,7 @@ public class RegisterActivity extends Activity {
 	}
 	
 	private String getXmlData(String filename, String str) {
-        String rss = SERVER_ADDRESS + "/result/";
+        String rss =  SERVER_ADDRESS + "/result/";
         String ret = "";
          
         try {

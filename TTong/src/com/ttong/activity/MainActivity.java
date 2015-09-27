@@ -23,6 +23,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -51,6 +53,8 @@ public class MainActivity extends Activity {
 	
 	@Override
     public void onCreate(Bundle savedInstanceState) {
+		StrictMode.enableDefaults();
+		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -71,17 +75,22 @@ public class MainActivity extends Activity {
 		super.onResume();
 	}
 
+    
 
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+         this.finish();
+         android.os.Process.killProcess(android.os.Process.myPid());
+         System.exit(0);
+	}
+	
 
 	public void connect(){
-    	
     	final Context context = this;
-    	
 		thread = new Thread(){
-    		
 			public void run(){
 				super.run();
-				
 				try{
 					client = new Socket(ip,port);			
 					clientThread = new ClientThread(client, null);
@@ -95,27 +104,21 @@ public class MainActivity extends Activity {
 			}
 		};
 		thread.start();
-		
 	}
-    
     
 	public void getDataFromDB(){
 		final Handler handler = new Handler();
+		
         runOnUiThread(new Runnable() {
-             
+        	
             public void run() {
-                // TODO Auto-generated method stub
                 final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "불러오는중.....", "잠시만 기다려주세요.");
-                 
                 handler.post(new Runnable() {
-                     
                     public void run() {
-                        // TODO Auto-generated method stub
                         try {
                             data.clear(); //반복적으로 누를경우 똑같은 값이 나오는 것을 방지하기 위해 data를 클리어함
                             URL url = new URL(SERVER_ADDRESS + "/ttong_search.php");
                             url.openStream(); //서버의 serarch.php파일을 실행함
-                 
                             ArrayList<String> namelist = getXmlDataList("searchresult.xml", "name");//name 태그값을 읽어 namelist 리스트에 저장
                             ArrayList<String> phone_number_list = getXmlDataList("searchresult.xml", "phone_number"); //price 태그값을 읽어 prica 리스트에 저장
                             if(namelist.isEmpty()) {
@@ -123,18 +126,14 @@ public class MainActivity extends Activity {
                             	data.add(ud);
                             } else {
                                 for(int i = 0; i < namelist.size(); i++) {
-                                	////////////////////////////////////////////////////////
                                 	UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), 0);
                                     data.add(ud);
                                 }
                             }
                         } catch(Exception e) {
-                           // Log.e("Error", e.getMessage());
+                           Log.e("Error","error");
                         } finally{
                             dialog.dismiss();
-                            
-                            connect(); // 통신 서버
-                            
                             adapter.setData(data);
                             adapter.notifyDataSetChanged();
                         }
@@ -145,6 +144,7 @@ public class MainActivity extends Activity {
 	}
     
     public void checkLogin(){
+    	connect(); // 통신 서버
     	
     	if(!pref.getBoolean("LoginStatus", false)) {	// true=login, false=not login 
     		Intent i = new Intent(MainActivity.this, RegisterActivity.class);
