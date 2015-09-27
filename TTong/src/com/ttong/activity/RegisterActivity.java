@@ -22,7 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class LoginActivity extends Activity {
+public class RegisterActivity extends Activity {
 
 	private final String SERVER_ADDRESS = "http://14.63.226.208";
 	
@@ -35,7 +35,7 @@ public class LoginActivity extends Activity {
 		
 		StrictMode.enableDefaults();
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_register);
 		
 		nameET = (EditText) findViewById(R.id.name);
 		phoneET = (TextView) findViewById(R.id.phone);
@@ -49,7 +49,7 @@ public class LoginActivity extends Activity {
 			public void onClick(View v) {				
 				// TODO Auto-generated method stub
 				if (nameET.getText().toString().equals("") || phoneET.getText().toString().equals("")) {					
-					Toast.makeText(LoginActivity.this, "이름과 전화번호를 입력하세요!", Toast.LENGTH_SHORT).show();
+					Toast.makeText(RegisterActivity.this, "이름과 전화번호를 입력하세요!", Toast.LENGTH_SHORT).show();
 					return;
 				}
 				
@@ -72,7 +72,7 @@ public class LoginActivity extends Activity {
 							String result = getXmlData("insertresult.xml", "result"); 
 							
 							if (result.equals("1")) {
-								Toast.makeText(LoginActivity.this, "가입을 축하합니다.", Toast.LENGTH_SHORT).show();
+								Toast.makeText(RegisterActivity.this, "가입을 축하합니다.", Toast.LENGTH_SHORT).show();
 								
 								nameET.setText("");
 								phoneET.setText("");
@@ -82,10 +82,10 @@ public class LoginActivity extends Activity {
 								editor.putString("UserPhone", phone);
 								editor.commit();
 								
-								Intent i = new Intent(LoginActivity.this, MainActivity.class);
+								Intent i = new Intent(RegisterActivity.this, MainActivity.class);
 								startActivity(i);
 							} else 
-								Toast.makeText(LoginActivity.this, "가입에 실패했습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
+								Toast.makeText(RegisterActivity.this, "가입에 실패했습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}

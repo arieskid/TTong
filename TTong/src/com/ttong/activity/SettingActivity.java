@@ -31,13 +31,13 @@ public class SettingActivity extends Activity {
 	
 	TextView name, phone;
 	Switch hearDisable, speakDisable;
-	Button logoutBtn;
+	Button confirmBtn;
 	
 	Intent i;
 	String userName, userPhone;
 
-	boolean hearState, speakState;
-	int userState;
+	boolean hearState=false, speakState=false;
+	int userState= UserState.NOT_DISABLED;
 
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class SettingActivity extends Activity {
 		phone = (TextView) findViewById(R.id.userPhone);
 		hearDisable = (Switch) findViewById(R.id.hearDisable);
 		speakDisable = (Switch) findViewById(R.id.speakDisable);
-		logoutBtn = (Button) findViewById(R.id.logoutBtn);
+		confirmBtn = (Button) findViewById(R.id.confirmBtn);
 		
 		i = getIntent();
 		userName = i.getExtras().getString("userName");
@@ -56,7 +56,8 @@ public class SettingActivity extends Activity {
 		
 		name.setText(userName);
 		phone.setText(userPhone);
-
+		
+		// 청각
 		hearDisable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -65,11 +66,10 @@ public class SettingActivity extends Activity {
 				}else{
 					hearState = false;
 				}
-				updateUserStateToPref();
-				sendUserStateToDB();
 			}
 		});
 
+		// 언어
 		speakDisable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -78,21 +78,14 @@ public class SettingActivity extends Activity {
 				}else{
 					speakState = false;
 				}
-				updateUserStateToPref();
-				sendUserStateToDB();
 			}
 		});
 		
-		logoutBtn.setOnClickListener(new OnClickListener() {
+		confirmBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SharedPreferences preference = MainActivity.pref;
-				SharedPreferences.Editor editor = preference.edit();
-				
-				editor.putBoolean("LoginStatus", false);
-				editor.putString("UserName", "no name");
-				editor.putString("UserPhone", "no phone number");
-				editor.commit();
+				updateUserStateToPref();
+				sendUserStateToDB();
 			}
 		});
 	}
@@ -101,7 +94,7 @@ public class SettingActivity extends Activity {
 	public void updateUserStateToPref(){
 		
 		if(hearState && speakState){ 		
-			userState = UserState.NOT_DISABLED;
+			userState = UserState.BOTH_DISABLED;
 		} 
 		else if(hearState && (!speakState)){ 
 			userState = UserState.HEAR_DISABLED;
@@ -110,7 +103,7 @@ public class SettingActivity extends Activity {
 			userState = UserState.SPEAK_DISABLED;
 		} 
 		else if((!hearState) && (!speakState)){
-			userState = UserState.BOTH_DISABLED;
+			userState = UserState.NOT_DISABLED;
 		}
 		
 		SharedPreferences preference = MainActivity.pref;

@@ -32,7 +32,7 @@
         </activity>
         
         <activity android:name="com.ttong.activity.MainActivity" />
-        <activity android:name="com.ttong.activity.LoginActivity" />
+        <activity android:name="com.ttong.activity.RegisterActivity" />
         <activity android:name="com.ttong.activity.SettingActivity" />
         <activity android:name="com.ttong.activity.CallAskActivity" />
         <activity android:name="com.ttong.activity.CallLoadingActivity" />

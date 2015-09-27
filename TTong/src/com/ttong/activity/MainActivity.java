@@ -103,7 +103,7 @@ public class MainActivity extends Activity {
     public void checkLogin(){
     	
     	if(!pref.getBoolean("LoginStatus", false)) {	// true=login, false=not login 
-    		Intent i = new Intent(MainActivity.this, LoginActivity.class);
+    		Intent i = new Intent(MainActivity.this, RegisterActivity.class);
     		startActivity(i);
     	} else {
     		final Handler handler = new Handler();
