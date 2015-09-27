@@ -16,8 +16,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/ttong_app_icon"
+        android:label="온통통하다 "
         android:theme="@style/AppBaseTheme" >
         <activity
             android:name="com.ttong.activity.LoadingActivity"

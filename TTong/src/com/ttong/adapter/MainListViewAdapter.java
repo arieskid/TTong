@@ -54,6 +54,7 @@ public class MainListViewAdapter extends BaseAdapter {
 		View v = convertView;
 		final String name = data.get(position).getUserName();
 		final String phone = data.get(position).getUserPhone();
+		final int state = data.get(position).getUserState();
 		
 		if(v==null){
 			LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -62,6 +63,17 @@ public class MainListViewAdapter extends BaseAdapter {
 		
 		if(data != null){
 			ImageView iv = (ImageView) v.findViewById(R.id.user_info);
+			
+			if(state == 0) {
+				iv.setImageResource(R.drawable.star_non);
+			} else if(state == 1) {
+				iv.setImageResource(R.drawable.star_hear);
+			} else if(state == 2) {
+				iv.setImageResource(R.drawable.star_speak);
+			} else if(state == 3) {
+				iv.setImageResource(R.drawable.star_both);
+			}
+			
 			//iv.setImageDrawable(drawable);
 			//iv.setImageResource(resId);
 			

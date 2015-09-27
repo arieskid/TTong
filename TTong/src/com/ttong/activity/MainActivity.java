@@ -71,7 +71,6 @@ public class MainActivity extends Activity {
         
         checkLogin();
         
-		//////////////////////////////
 		runOnUiThread(new Runnable() {
 
 			public void run() {

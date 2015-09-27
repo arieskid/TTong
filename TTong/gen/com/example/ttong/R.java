@@ -42,6 +42,11 @@ public final class R {
         public static final int ic_user_state_2=0x7f02000e;
         public static final int ic_user_state_3=0x7f02000f;
         public static final int logo_loading=0x7f020010;
+        public static final int star_both=0x7f020011;
+        public static final int star_hear=0x7f020012;
+        public static final int star_non=0x7f020013;
+        public static final int star_speak=0x7f020014;
+        public static final int ttong_app_icon=0x7f020015;
     }
     public static final class id {
         public static final int action_call_stop=0x7f080018;
