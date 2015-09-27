@@ -5,6 +5,7 @@ import com.example.ttong.R.color;
 import com.ttong.activity.MainActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -82,6 +83,8 @@ public class C30Activity extends Activity implements OnClickListener {
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
 			MainActivity.clientThread.send("StopCall ");
+			Intent i = new Intent(this, MainActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

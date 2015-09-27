@@ -76,6 +76,8 @@ public class C01Activity extends Activity implements OnClickListener {
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
 			MainActivity.clientThread.send("StopCall ");
+			Intent i = new Intent(this, MainActivity.class);
+			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
