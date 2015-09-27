@@ -8,5 +8,11 @@
         android:showAsAction="always"
         android:icon="@drawable/ic_setting"
         android:title="@string/action_settings"/>
+    
+    <item
+        android:id="@+id/action_refresh"
+        android:showAsAction="always"
+        android:icon="@drawable/ic_refresh"
+        android:title="action_refresh"/>
 
 </menu>
