@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -32,7 +33,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-	
+
 	private final String SERVER_ADDRESS = "http://14.63.226.208";
 	
 	ListView list;
@@ -83,7 +84,7 @@ public class MainActivity extends Activity {
 				super.run();
 				
 				try{
-					client = new Socket(ip,port);			
+					client = new Socket(ip,port);
 					clientThread = new ClientThread(client, null);
 					clientThread.setContext(context);
 					clientThread.start();
@@ -116,15 +117,16 @@ public class MainActivity extends Activity {
                             URL url = new URL(SERVER_ADDRESS + "/ttong_search.php");
                             url.openStream(); //서버의 serarch.php파일을 실행함
                  
-                            ArrayList<String> namelist = getXmlDataList("searchresult.xml", "name");//name 태그값을 읽어 namelist 리스트에 저장
-                            ArrayList<String> phone_number_list = getXmlDataList("searchresult.xml", "phone_number"); //price 태그값을 읽어 prica 리스트에 저장
+                            ArrayList<String> namelist = getXmlDataList("searchresult.xml", "name");
+                            ArrayList<String> phone_number_list = getXmlDataList("searchresult.xml", "phone_number");
+                            ArrayList<String> user_state = getXmlDataList("searchresult.xml", "is_disabled");
+                            
                             if(namelist.isEmpty()) {
                             	UserData ud = new UserData("default","000-0000-0000",0);
                             	data.add(ud);
                             } else {
                                 for(int i = 0; i < namelist.size(); i++) {
-                                	////////////////////////////////////////////////////////
-                                	UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), 0);
+                                	UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), Integer.parseInt(user_state.get(i)));
                                     data.add(ud);
                                 }
                             }
