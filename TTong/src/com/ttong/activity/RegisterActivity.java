@@ -42,7 +42,8 @@ public class RegisterActivity extends Activity {
 		btn = (Button) findViewById(R.id.okBtn);
 		
 		TelephonyManager telManager = (TelephonyManager)getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
-		phoneET.setText(telManager.getLine1Number()); 
+		String phoneNum = telManager.getLine1Number();
+		phoneET.setText(phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11));
 		
 		btn.setOnClickListener(new View.OnClickListener() { // 입력 버튼을 눌렀을 때
 
