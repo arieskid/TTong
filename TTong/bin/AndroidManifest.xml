@@ -36,15 +36,15 @@
         <activity android:name="com.ttong.activity.SettingActivity" />
         <activity android:name="com.ttong.activity.CallAskActivity" />
         <activity android:name="com.ttong.activity.CallLoadingActivity" />
-        <activity android:name="com.ttong.activity.C00Activity" />
-        <activity android:name="com.ttong.activity.C01Activity" />
-        <activity android:name="com.ttong.activity.C02Activity" />
-        <activity android:name="com.ttong.activity.C03Activity" />
-        <activity android:name="com.ttong.activity.C10Activity" />
-        <activity android:name="com.ttong.activity.C20Activity" />
-        <activity android:name="com.ttong.activity.C30Activity" />
-        <activity android:name="com.ttong.activity.C11Activity" />
-        <activity android:name="com.ttong.activity.C22Activity" />
+        <activity android:name="com.ttong.call_activity.C00Activity" />
+        <activity android:name="com.ttong.call_activity.C01Activity" />
+        <activity android:name="com.ttong.call_activity.C02Activity" />
+        <activity android:name="com.ttong.call_activity.C03Activity" />
+        <activity android:name="com.ttong.call_activity.C10Activity" />
+        <activity android:name="com.ttong.call_activity.C20Activity" />
+        <activity android:name="com.ttong.call_activity.C30Activity" />
+        <activity android:name="com.ttong.call_activity.C11Activity" />
+        <activity android:name="com.ttong.call_activity.C22Activity" />
         
     </application>
 

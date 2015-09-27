@@ -131,14 +131,21 @@ public class ClientThread extends Thread{
 				// when destination answer the call. - when i call and receiver answered.
 				else if(msg.startsWith("OkayCall ")){
 					// change the activity according to it and its destination's state
+					
+					Log.d("****", "test msg : "+msg);
+					
 					String[] arr = msg.split("/");
 					//destState = Integer.valueOf(msg.substring(10, 11));
 					destState = Integer.valueOf(arr[1]);
 					destName = arr[2];
 					destPhone = arr[3];
+					
+					Log.d("***", "test : "+arr[0]+"/"+arr[1]+"/"+arr[2]+"/"+arr[3]);
 
 					Intent i = null;
 					int myState = MainActivity.pref.getInt("myState", 0);
+					
+					Log.d("***", "test : "+String.valueOf(myState));
 
 					switch(destState + (myState*10)){
 					case 0:
@@ -175,12 +182,16 @@ public class ClientThread extends Thread{
 
 					case 30: case 31: case 32: case 33:
 						i = new Intent(context, C30Activity.class);
+						Log.d("***", "test : into switch");
 						break;
 					}
+					Log.d("***", "test : out switch");
 					
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
+					msg = null;
 					context.startActivity(i);
+					
 				}
 				else if(msg.startsWith("StopCall ")){
 					// return main activity

@@ -14,15 +14,18 @@ import com.ttong.call_activity.C30Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 public class CallAskActivity extends Activity implements OnClickListener{
 
 	// 만약 내가 call ok 한 사이에 상대방이 전화 끊으면??
 	
 	ImageButton btn_ok, btn_no;
+	TextView name, phone;
 	
 	int destState;
 	String destPhone;
@@ -43,6 +46,11 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		btn_no = (ImageButton) findViewById(R.id.callReject);
 		btn_ok.setOnClickListener(this);
 		btn_no.setOnClickListener(this);
+		
+		name = (TextView) findViewById(R.id.callName);
+		phone = (TextView) findViewById(R.id.callPhone);
+		name.setText(destName);
+		phone.setText(destPhone);
 	}
 
 
@@ -51,6 +59,8 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		int myState = MainActivity.pref.getInt("userState", 0);
 		
 		Intent i = null;
+		Log.d("***", "test myState : "+String.valueOf(myState));
+		Log.d("***", "test destState : "+String.valueOf(destState));
 		
 		// ok button
 		if(v.getId() == R.id.callAgree){
@@ -80,15 +90,17 @@ public class CallAskActivity extends Activity implements OnClickListener{
 					i = new Intent(this, C22Activity.class);
 					break;
 				case 30: case 31: case 32: case 33:
+					Log.d("****", "test : 0");
 					i = new Intent(this, C30Activity.class);
 					break;
 			}
 			
+			Log.d("****", "test : 1");
+			MainActivity.clientThread.send("OkayCall ");
+			Log.d("****", "test : 2");
 			i.putExtra("destName", destName);
 			i.putExtra("destPhone", destPhone);
 			startActivity(i);
-			
-			MainActivity.clientThread.send("OkayCall ");
 		} 
 		
 		// no button
