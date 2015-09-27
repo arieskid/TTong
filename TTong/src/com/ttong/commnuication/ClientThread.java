@@ -25,6 +25,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 public class ClientThread extends Thread{
 
@@ -112,8 +113,10 @@ public class ClientThread extends Thread{
 				// when receive call
 				if(msg.startsWith("StartCall ")){
 					// change the activity according to it and its destination's state
+					Log.d("****", "test msg : "+msg);
 					String[] arr = msg.split("/");
 					//destState = Integer.valueOf(msg.substring(10, 11));
+					Log.d("***", "test : "+arr[0]+"/"+arr[1]+"/"+arr[2]+"/"+arr[3]);
 					destState = Integer.valueOf(arr[1]);
 					destName = arr[2];
 					destPhone = arr[3];

@@ -30,6 +30,7 @@ public class CallLoadingActivity extends Activity{
 		setContentView(R.layout.activity_call_loading);
 		
 		MainActivity.clientThread.setContext(this);
+		MainActivity.clientThread.send("StartCall ");
 
 		name = (TextView) findViewById(R.id.receiver);
 		phone = (TextView) findViewById(R.id.receiverPhone);

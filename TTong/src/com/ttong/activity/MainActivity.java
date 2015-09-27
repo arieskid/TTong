@@ -207,13 +207,15 @@ public class MainActivity extends Activity {
 	}
     
     public void checkLogin(){
-    	connect(); // 통신 서버
+    	 // 통신 서버
     	
     	if(!pref.getBoolean("LoginStatus", false)) {	// true=login, false=not login 
     		Intent i = new Intent(MainActivity.this, RegisterActivity.class);
     		startActivity(i);
     	} else {
+    		Log.d("#######", "check login - db, connect");
     		getDataFromDB();
+    		connect();
     	}
     }
 

@@ -84,8 +84,8 @@ public class MainListViewAdapter extends BaseAdapter {
 					String myPhone = preference.getString("UserPhone", "no phone number");
 					
 					ClientThread ct = ((MainActivity)context).clientThread;
-					ct.sendMyInfo(myName, myPhone);;
 					ct.sendDest(phone);
+					ct.sendMyInfo(myName, myPhone);
 					
 					Intent intent = new Intent(context, CallLoadingActivity.class);
 					intent.putExtra("name", name);
