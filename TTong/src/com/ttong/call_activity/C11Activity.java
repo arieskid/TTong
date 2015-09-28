@@ -85,7 +85,6 @@ public class C11Activity extends Activity implements OnClickListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-////////////////////////// 연진이한테 물어보기!! 
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
 			MainActivity.clientThread.send("StopCall ");
@@ -174,21 +173,25 @@ public class C11Activity extends Activity implements OnClickListener {
 		
 		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
 		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());
+		int dp_15 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
 		
 		TextView tv = new TextView(this);
 		tv.setText(str);
 		tv.setTextColor(color.Indigo8);
+		tv.setTextSize(dp_15);
 		LinearLayout.LayoutParams params = null;
 		
 		// send text
 		if(flag == 0){
 			tv.setPadding(0, dp_5, dp_10, dp_5);
-			params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, Gravity.RIGHT); 
+			tv.setGravity(Gravity.RIGHT);
+			params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT); 
 		}
 		// receive text
 		else if(flag == 1){
 			tv.setPadding(dp_10, dp_5, 0, dp_5);
-			params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, Gravity.LEFT);
+			tv.setGravity(Gravity.LEFT);
+			params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
 		}
 		
 		if(params != null)

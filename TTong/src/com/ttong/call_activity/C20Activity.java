@@ -42,7 +42,9 @@ public class C20Activity extends Activity implements OnClickListener {
 		editText = (EditText) findViewById(R.id.textEt);
 		ll = (LinearLayout) findViewById(R.id.showText);
 		
-		btn_stt.setEnabled(false);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
+		params.weight=0;
+		btn_stt.setLayoutParams(params);
 		btn_send.setOnClickListener(this);
 	}
 	
@@ -64,7 +66,6 @@ public class C20Activity extends Activity implements OnClickListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-////////////////////////// 연진이한테 물어보기!! 
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
 			MainActivity.clientThread.send("StopCall ");
@@ -78,13 +79,16 @@ public class C20Activity extends Activity implements OnClickListener {
 	public void showText(String str){
 		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
 		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());
+		int dp_15 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
 		
 		TextView tv = new TextView(this);
 		tv.setText(str);
+		tv.setTextSize(dp_15);
 		tv.setTextColor(color.Indigo8);
 		tv.setPadding(0, dp_5, dp_10, dp_5);
+		tv.setGravity(Gravity.RIGHT);
 		
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT, Gravity.RIGHT);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
 		tv.setLayoutParams(params);
 		ll.addView(tv);
 	}

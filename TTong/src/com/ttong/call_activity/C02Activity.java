@@ -111,7 +111,6 @@ public class C02Activity extends Activity implements OnInitListener, OnClickList
 
 	@Override
 	public void onClick(View v) {
-///////////////////////////// 연진이가 확인할 부분 - 서버에게 통화 종료 요청.
 		MainActivity.clientThread.send("StopCall ");
 		
 		Intent i = new Intent(this, MainActivity.class);

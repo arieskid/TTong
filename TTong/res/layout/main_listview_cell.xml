@@ -11,7 +11,7 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:padding="10dp"
-        android:src="@drawable/ic_user_state_0" />
+        android:src="@drawable/star_non" />
     
     <LinearLayout
         android:layout_width="0dp"

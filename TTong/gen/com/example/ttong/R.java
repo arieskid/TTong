@@ -30,23 +30,18 @@ public final class R {
         public static final int ic_call_accept=0x7f020002;
         public static final int ic_call_loading=0x7f020003;
         public static final int ic_call_reject=0x7f020004;
-        public static final int ic_caller=0x7f020005;
-        public static final int ic_launcher=0x7f020006;
+        public static final int ic_caller_0=0x7f020005;
+        public static final int ic_caller_1=0x7f020006;
         public static final int ic_mic=0x7f020007;
-        public static final int ic_mic_disable=0x7f020008;
-        public static final int ic_refresh=0x7f020009;
-        public static final int ic_send=0x7f02000a;
-        public static final int ic_setting=0x7f02000b;
-        public static final int ic_user_state_0=0x7f02000c;
-        public static final int ic_user_state_1=0x7f02000d;
-        public static final int ic_user_state_2=0x7f02000e;
-        public static final int ic_user_state_3=0x7f02000f;
-        public static final int logo_loading=0x7f020010;
-        public static final int star_both=0x7f020011;
-        public static final int star_hear=0x7f020012;
-        public static final int star_non=0x7f020013;
-        public static final int star_speak=0x7f020014;
-        public static final int ttong_app_icon=0x7f020015;
+        public static final int ic_refresh=0x7f020008;
+        public static final int ic_send=0x7f020009;
+        public static final int ic_setting=0x7f02000a;
+        public static final int logo_loading=0x7f02000b;
+        public static final int star_both=0x7f02000c;
+        public static final int star_hear=0x7f02000d;
+        public static final int star_non=0x7f02000e;
+        public static final int star_speak=0x7f02000f;
+        public static final int ttong_app_icon=0x7f020010;
     }
     public static final class id {
         public static final int action_call_stop=0x7f080018;
