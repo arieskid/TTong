@@ -188,8 +188,8 @@ public class MainActivity extends Activity {
                             	data.add(ud);
                             } else {
                                 for(int i = 0; i < namelist.size(); i++) {
-                                	UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), Integer.parseInt(user_state.get(i)));
-                                    data.add(ud);
+	                                UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), Integer.parseInt(user_state.get(i)));
+	                                data.add(ud);
                                 }
                             }
                         } catch(Exception e) {

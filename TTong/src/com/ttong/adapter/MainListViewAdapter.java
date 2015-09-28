@@ -11,6 +11,7 @@ import com.ttong.model.UserData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,7 +83,6 @@ public class MainListViewAdapter extends BaseAdapter {
 			
 			TextView phone_t = (TextView) v.findViewById(R.id.phone_number);
 			phone_t.setText(phone);
-			
 			
 			ImageButton btn = (ImageButton) v.findViewById(R.id.btn_call);
 			btn.setOnClickListener(new OnClickListener() {

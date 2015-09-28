@@ -11,6 +11,7 @@ import com.example.ttong.R;
 import com.ttong.model.UserState;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,9 +37,11 @@ public class SettingActivity extends Activity {
 	Intent i;
 	String userName, userPhone;
 
-	boolean hearState=false, speakState=false;
-	int userState= UserState.NOT_DISABLED;
-
+	boolean hearState = false, speakState = false;
+	
+	Context context;
+	SharedPreferences preference = ((MainActivity)context).pref;
+	int userState = preference.getInt("userState", 0);
 	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,6 +59,29 @@ public class SettingActivity extends Activity {
 		
 		name.setText(userName);
 		phone.setText(userPhone);
+		
+		// Setting switch from preference information
+		if(userState == 0) {
+			hearDisable.setChecked(false);
+			speakDisable.setChecked(false);
+			hearState = false;
+			speakState = false;
+		} else if (userState == 1) {
+			hearDisable.setChecked(true);
+			speakDisable.setChecked(false);
+			hearState = true;
+			speakState = false;
+		} else if (userState == 2) {
+			hearDisable.setChecked(false);
+			speakDisable.setChecked(true);
+			hearState = false;
+			speakState = true;
+		} else if (userState == 3) {
+			hearDisable.setChecked(true);
+			speakDisable.setChecked(true);
+			hearState = true;
+			speakState = true;
+		}
 		
 		// 청각
 		hearDisable.setOnCheckedChangeListener(new OnCheckedChangeListener() {
