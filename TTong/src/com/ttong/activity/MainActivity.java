@@ -3,11 +3,16 @@ package com.ttong.activity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -43,7 +48,7 @@ public class MainActivity extends Activity {
 	ListView list;
 	ArrayList<UserData> data;
     MainListViewAdapter adapter;
-        
+    
 	static final String ip = "14.63.226.208";
 	static final int port = 8080;
 	
@@ -99,6 +104,7 @@ public class MainActivity extends Activity {
 		});
     }	
 
+	
 	private String getXmlData(String filename, String str) {
 		String rss = SERVER_ADDRESS + "/result/";
 		String ret = "";

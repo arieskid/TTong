@@ -31,6 +31,8 @@ public class CallAskActivity extends Activity implements OnClickListener{
 	int destState;
 	String destPhone;
 	String destName;
+	
+	String callerIp; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		destState = i.getExtras().getInt("destState");
 		destPhone = i.getExtras().getString("destPhone");
 		destName = i.getExtras().getString("destName");
+		
+		callerIp = i.getExtras().getString("callerIp");
 
 		btn_ok = (ImageButton) findViewById(R.id.callAgree);
 		btn_no = (ImageButton) findViewById(R.id.callReject);
@@ -110,6 +114,11 @@ public class CallAskActivity extends Activity implements OnClickListener{
 			MainActivity.clientThread.send("OkayCall "+"/"+myState+"/"+myName+"/"+myPhone);
 			i.putExtra("destName", destName);
 			i.putExtra("destPhone", destPhone);
+			
+			i.putExtra("destIp", callerIp);
+			i.putExtra("sendPort", 1989);
+			i.putExtra("recvPort", 1988);
+			
 			startActivity(i);
 		} 
 		
