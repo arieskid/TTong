@@ -1,7 +1,12 @@
 package com.ttong.call_activity;
 
-
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.regex.Pattern;
 
 import com.example.ttong.R;
 import com.example.ttong.R.color;
@@ -15,6 +20,7 @@ import android.os.Bundle;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.Menu;
@@ -27,6 +33,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import jay.media.MediaService;
 
 // me : 0(not disabled)
 // dest : 1(청각장애인)
@@ -39,7 +46,14 @@ public class C01Activity extends Activity implements OnClickListener {
 	LinearLayout ll;
 	
 	SpeechRecognizer mRecognizer;
-	Intent i;
+	Intent i, vsi;
+	
+	private boolean isStarted = false;
+	MediaService mMediaService = null;
+	///// 미정인 값들 
+	static String myIp, sendIp;
+	int sendPort, recvPort;
+	final int et_ec_buffer_size = 10;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
@@ -59,9 +73,16 @@ public class C01Activity extends Activity implements OnClickListener {
         i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
+        
+        vsi = getIntent();
+        sendIp = vsi.getExtras().getString("destIp");
+		recvPort = vsi.getExtras().getInt("recvPort");
+		sendPort = 12345;
 		
 		btn_send.setOnClickListener(this);
         btn_stt.setOnClickListener(this);
+        
+        startVS();
 	}
 	
 	@Override
@@ -75,11 +96,21 @@ public class C01Activity extends Activity implements OnClickListener {
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
 			MainActivity.clientThread.send("StopCall ");
+			
+			stopVS();
+			
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	public void stopVS(){
+		if (isStarted == true) {
+			mMediaService.stopAudio();
+			isStarted = false;
+		}
 	}
 	
 	private RecognitionListener listener = new RecognitionListener() {
@@ -173,5 +204,61 @@ public class C01Activity extends Activity implements OnClickListener {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
 		tv.setLayoutParams(params);
 		ll.addView(tv);
+	}
+	
+	public void startVS(){
+		try {
+        	myIp = getLocalIPv4Address();
+		} catch (SocketException e) {
+			e.printStackTrace();
+		}
+		
+		Log.d("####", "test c00 myIp : "+myIp);
+		mMediaService = new MediaService();
+		
+		String ipAddr = sendIp;
+		int remotePort = sendPort;
+		int localport = recvPort;
+
+		if (isStarted == true) {
+			Toast.makeText(this, "Already connected", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		// --> make the ip address into match form!!! 
+		if (isIpAddr(ipAddr)) {
+			int ec_buffer_pkgs = et_ec_buffer_size; 
+			mMediaService.startAudio(ipAddr, 101, 8000, remotePort, localport, ec_buffer_pkgs);
+			isStarted = true;
+
+			/* 101:Speex 8:G711a 0:G711u 9:G722 */
+
+			// audioWriter = new AudioWriter();
+			// audioWriter.init(ipAddr, 4321);
+			// audioWriter.start();
+		} else {
+			Toast.makeText(this, "ip illegal!! @" + ipAddr + " | try again!", Toast.LENGTH_LONG).show();
+		}
+	}
+	
+	/* Check the string if it is an legal ip address */  
+	private boolean isIpAddr(String str) {
+		// parameter: regular expression!!!!!!
+		Pattern pattern = Pattern.compile("^((\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5]"
+											+ "|[*])\\.){3}(\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5]|[*])$");
+		return pattern.matcher(str).matches();
+	}
+	
+	private String getLocalIPv4Address() throws SocketException {
+		for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+			NetworkInterface intf = en.nextElement();
+			for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+				InetAddress inetAddress = enumIpAddr.nextElement();
+				if (!inetAddress.isLoopbackAddress() && (inetAddress instanceof Inet4Address)) {
+					return inetAddress.getHostAddress().toString();
+				}
+			}
+		}
+		return "null";
 	}
 }

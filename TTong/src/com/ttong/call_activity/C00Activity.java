@@ -9,11 +9,11 @@ import java.util.regex.Pattern;
 
 import com.example.ttong.R;
 import com.ttong.activity.MainActivity;
-import com.ttong.commnuication.ClientThread;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -36,7 +36,7 @@ public class C00Activity extends Activity implements OnClickListener{
 	///// 미정인 값들 
 	static String myIp, sendIp;
 	int sendPort, recvPort;
-	int et_ec_buffer_size = 10;
+	final int et_ec_buffer_size = 10;
 	
 	
 	@Override
@@ -56,6 +56,10 @@ public class C00Activity extends Activity implements OnClickListener{
 		sendIp = i.getExtras().getString("destIp");
 		sendPort = i.getExtras().getInt("sendPort");
 		recvPort = i.getExtras().getInt("recvPort");
+		
+		Log.d("####", "test c00 chatWith : "+sendIp);
+		Log.d("####", "test c00 sendPort : "+sendPort);
+		Log.d("####", "test c00 recvPort : "+recvPort);
 		
 		nameTv.setText(name);
 		phoneTv.setText(phone);
@@ -89,6 +93,7 @@ public class C00Activity extends Activity implements OnClickListener{
 			e.printStackTrace();
 		}
 		
+		Log.d("####", "test c00 myIp : "+myIp);
 		mMediaService = new MediaService();
 		
 		String ipAddr = sendIp;
