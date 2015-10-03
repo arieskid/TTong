@@ -36,6 +36,8 @@ public class ClientThread extends Thread{
 	Handler handler;
 	Context context;
 
+	int activityNum;
+	
 	int destState = 0;
 	String destName;
 	String destPhone;
@@ -125,6 +127,11 @@ public class ClientThread extends Thread{
 
 					// 전화받을래??
 					Intent i = new Intent(context, CallAskActivity.class);
+					
+					///////// 전화 건 사람의 ip 주소 넘겨주기
+					String callerIp = "192.168.0.7";
+					i.putExtra("callerIp", callerIp);
+					
 					i.putExtra("destState", destState);
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
@@ -144,8 +151,10 @@ public class ClientThread extends Thread{
 					
 					Log.d("***", "test ct my : "+String.valueOf(myState));
 					Log.d("***", "test ct dest : "+String.valueOf(destState));
-
-					switch(destState + (myState*10)){
+					
+					activityNum = destState + (myState*10);
+				
+					switch(activityNum){
 					case 0:
 						i = new Intent(context, C00Activity.class);
 						Log.d("****", "test ct : 0");
@@ -192,6 +201,13 @@ public class ClientThread extends Thread{
 						break;
 					}
 					
+					//////////////////
+					// 서버부터 상대방 ip받아서 통화화면으로 넘겨주기
+					//////////////////
+					String destIp = "192.168.0.15"; // 인이 droptop ip
+					i.putExtra("destIp", destIp);
+					i.putExtra("sendPort", 1988);
+					i.putExtra("recvPort", 1989);
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
 					msg = null;
@@ -201,6 +217,29 @@ public class ClientThread extends Thread{
 				else if(msg.startsWith("StopCall ")){
 					// return main activity
 					client.close();
+					
+					switch(activityNum){
+					case 0:
+						((C00Activity)context).stopVS();
+						break;
+					case 1:
+						((C01Activity)context).stopVS();
+						break;
+					case 2:
+						((C02Activity)context).stopVS();
+						break;
+					case 10: case 12:
+						((C10Activity)context).stopVS();
+						break;
+					case 20: case 21:
+						((C20Activity)context).stopVS();
+						break;
+					}
+
+//					if(context instanceof C00Activity){
+//							
+//					}
+					
 					Intent i = new Intent(context, MainActivity.class);
 					context.startActivity(i);
 				}

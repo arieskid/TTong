@@ -3,11 +3,16 @@ package com.ttong.activity;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -43,7 +48,7 @@ public class MainActivity extends Activity {
 	ListView list;
 	ArrayList<UserData> data;
     MainListViewAdapter adapter;
-        
+    
 	static final String ip = "14.63.226.208";
 	static final int port = 8080;
 	
@@ -77,28 +82,34 @@ public class MainActivity extends Activity {
 
 				TelephonyManager telManager = (TelephonyManager) getApplicationContext()
 						.getSystemService(getApplicationContext().TELEPHONY_SERVICE);
-				String phoneNum = telManager.getLine1Number();
-				phoneNum = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
+				
+				if(telManager != null){
+					String phoneNum = telManager.getLine1Number();
+					if(phoneNum != null)
+						phoneNum = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
+					else phoneNum="123-4567-9123";
 
-				try {
-					URL url = new URL(SERVER_ADDRESS + "/ttong_updateIP.php?" + "phone_number="
-							+ URLEncoder.encode(phoneNum, "UTF-8"));
-					url.openStream();
+					try {
+						URL url = new URL(SERVER_ADDRESS + "/ttong_updateIP.php?" + "phone_number="
+								+ URLEncoder.encode(phoneNum, "UTF-8"));
+						url.openStream();
 
-					String result = getXmlData("updateipresult.xml", "result");
+						String result = getXmlData("updateipresult.xml", "result");
 
-					if (result.equals("1")) {
-						Toast.makeText(MainActivity.this, "update IP", Toast.LENGTH_SHORT).show();
+						if (result.equals("1")) {
+							Toast.makeText(MainActivity.this, "update IP", Toast.LENGTH_SHORT).show();
 
-					} else
-						Toast.makeText(MainActivity.this, "update IP failed", Toast.LENGTH_SHORT).show();
-				} catch (Exception e) {
-					e.printStackTrace();
+						} else
+							Toast.makeText(MainActivity.this, "update IP failed", Toast.LENGTH_SHORT).show();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 				}
 			}
 		});
     }	
 
+	
 	private String getXmlData(String filename, String str) {
 		String rss = SERVER_ADDRESS + "/result/";
 		String ret = "";

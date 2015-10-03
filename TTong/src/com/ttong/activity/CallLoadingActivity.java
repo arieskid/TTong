@@ -44,7 +44,7 @@ public class CallLoadingActivity extends Activity{
 		name.setText(destName);
 		phone.setText(destPhone);
 	}
-
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.call, menu);
