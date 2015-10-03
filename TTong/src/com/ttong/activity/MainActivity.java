@@ -37,8 +37,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
@@ -75,7 +77,7 @@ public class MainActivity extends Activity {
         list.setAdapter(adapter);
         
         checkLogin();
-        
+
 		runOnUiThread(new Runnable() {
 
 			public void run() {
@@ -178,7 +180,10 @@ public class MainActivity extends Activity {
     
 	public void getDataFromDB(){
 		final Handler handler = new Handler();
-		
+		TelephonyManager telManager = (TelephonyManager)getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+		String phoneNum = telManager.getLine1Number();
+		final String userPhone = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
+				
         runOnUiThread(new Runnable() {
         	
             public void run() {
@@ -199,8 +204,33 @@ public class MainActivity extends Activity {
                             	data.add(ud);
                             } else {
                                 for(int i = 0; i < namelist.size(); i++) {
-	                                UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), Integer.parseInt(user_state.get(i)));
-	                                data.add(ud);
+                                	if(!phone_number_list.get(i).equals(userPhone)) {
+		                                UserData ud = new UserData(namelist.get(i), phone_number_list.get(i), Integer.parseInt(user_state.get(i)));
+		                                data.add(ud);
+                                	} else {
+                                		final int userState = pref.getInt("userState", 0);
+                                        
+                                        ImageView iv = (ImageView) findViewById(R.id.my_info);
+                                		
+                                		if(userState == 0) {
+                                			iv.setImageResource(R.drawable.star_non);
+                                		} else if(userState == 1) {
+                                			iv.setImageResource(R.drawable.star_hear);
+                                		} else if(userState == 2) {
+                                			iv.setImageResource(R.drawable.star_speak);
+                                		} else if(userState == 3) {
+                                			iv.setImageResource(R.drawable.star_both);
+                                		}
+                                		
+                                		//iv.setImageDrawable(drawable);
+                                		//iv.setImageResource(resId);
+                                		
+                                		TextView name_t = (TextView)findViewById(R.id.myName);
+                                		name_t.setText(pref.getString("UserName", "default name"));
+                                		
+                                		TextView phone_t = (TextView) findViewById(R.id.myPhone_number);
+                                		phone_t.setText(pref.getString("UserPhone", "000-0000-0000"));
+                                	}
                                 }
                             }
                         } catch(Exception e) {
@@ -224,6 +254,7 @@ public class MainActivity extends Activity {
     		startActivity(i);
     	} else {
     		Log.d("#######", "check login - db, connect");
+    		
     		getDataFromDB();
     		connect();
     	}

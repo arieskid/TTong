@@ -44,33 +44,36 @@ public final class R {
         public static final int ttong_app_icon=0x7f020010;
     }
     public static final class id {
-        public static final int action_call_stop=0x7f080018;
-        public static final int action_refresh=0x7f08001a;
-        public static final int action_settings=0x7f080019;
-        public static final int btn_call=0x7f080017;
+        public static final int action_call_stop=0x7f08001b;
+        public static final int action_refresh=0x7f08001d;
+        public static final int action_settings=0x7f08001c;
+        public static final int btn_call=0x7f08001a;
         public static final int callAgree=0x7f080002;
         public static final int callName=0x7f080000;
         public static final int callPhone=0x7f080001;
         public static final int callReject=0x7f080003;
-        public static final int callStopBtn=0x7f080014;
-        public static final int confirmBtn=0x7f08000f;
-        public static final int hearDisable=0x7f08000d;
-        public static final int listView=0x7f080006;
-        public static final int micBtn=0x7f080012;
-        public static final int name=0x7f080008;
-        public static final int okBtn=0x7f08000a;
-        public static final int phone=0x7f080009;
-        public static final int phone_number=0x7f080016;
+        public static final int callStopBtn=0x7f080017;
+        public static final int confirmBtn=0x7f080012;
+        public static final int hearDisable=0x7f080010;
+        public static final int listView=0x7f080009;
+        public static final int micBtn=0x7f080015;
+        public static final int myName=0x7f080007;
+        public static final int myPhone_number=0x7f080008;
+        public static final int my_info=0x7f080006;
+        public static final int name=0x7f08000b;
+        public static final int okBtn=0x7f08000d;
+        public static final int phone=0x7f08000c;
+        public static final int phone_number=0x7f080019;
         public static final int receiver=0x7f080004;
         public static final int receiverPhone=0x7f080005;
-        public static final int refreshBtn=0x7f080007;
-        public static final int sendBtn=0x7f080013;
-        public static final int showText=0x7f080010;
-        public static final int speakDisable=0x7f08000e;
-        public static final int textEt=0x7f080011;
-        public static final int userName=0x7f08000b;
-        public static final int userPhone=0x7f08000c;
-        public static final int user_info=0x7f080015;
+        public static final int refreshBtn=0x7f08000a;
+        public static final int sendBtn=0x7f080016;
+        public static final int showText=0x7f080013;
+        public static final int speakDisable=0x7f080011;
+        public static final int textEt=0x7f080014;
+        public static final int userName=0x7f08000e;
+        public static final int userPhone=0x7f08000f;
+        public static final int user_info=0x7f080018;
     }
     public static final class layout {
         public static final int activity_call_ask=0x7f030000;

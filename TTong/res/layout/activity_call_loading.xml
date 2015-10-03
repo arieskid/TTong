@@ -47,8 +47,8 @@
         android:gravity="center" >
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="220dp"
+            android:layout_height="190dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_call_loading" />
     </LinearLayout>

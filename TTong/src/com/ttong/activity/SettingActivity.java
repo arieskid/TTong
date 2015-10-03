@@ -136,6 +136,9 @@ public class SettingActivity extends Activity {
 		SharedPreferences.Editor editor = preference.edit();
 		
 		editor.putInt("userState", userState);
+		
+		Log.d("####PREFERENCE STATE: ", "value: " + preference.getInt("userState", 10));
+		
 		editor.commit();
 	}
 	

@@ -4,6 +4,59 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
+    <LinearLayout
+        android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+   		android:orientation="horizontal"
+   		android:background="@color/Indigo1" >
+   		
+        <TextView 
+        android:layout_width="15dp"
+        android:layout_height="wrap_content" />
+        
+	    <ImageView
+	        android:id="@+id/my_info"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:layout_gravity="center"
+	        android:padding="10dp"
+	        android:src="@drawable/star_non" />
+	    
+	    <TextView 
+        android:layout_width="15dp"
+        android:layout_height="wrap_content" />
+	    
+	    
+	    <LinearLayout
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:orientation="vertical"
+	        android:gravity="center_vertical"
+	        android:layout_gravity="center"
+	        android:padding="10dp" >
+	
+	        <TextView
+	            android:id="@+id/myName"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:textSize="20dp"
+	            android:text="user name" />
+	
+	        <TextView
+	            android:id="@+id/myPhone_number"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="user phone number" />
+	    </LinearLayout>
+	    
+	    <TextView 
+        android:layout_width="15dp"
+        android:layout_height="wrap_content" />
+	    
+    </LinearLayout>
+    
 	<ListView 
 	    android:id="@+id/listView"
 	    android:layout_width="match_parent"
