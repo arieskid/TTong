@@ -220,7 +220,6 @@ public class ClientThread extends Thread{
 				}
 				else if(msg.startsWith("StopCall ")){
 					// return main activity
-					client.close();
 					
 					Log.e("####", "StopCall : "+ activityNum);
 					
@@ -230,6 +229,7 @@ public class ClientThread extends Thread{
 						break;
 					case 1:
 						((C01Activity)context).stopVS();
+						System.out.println("stopVS!!!!!!!!!!");
 						break;
 					case 2:
 						((C02Activity)context).stopVS();
@@ -249,9 +249,12 @@ public class ClientThread extends Thread{
 					
 					Intent i = new Intent(context, MainActivity.class);
 					context.startActivity(i);
+					client.close();
+					return null;
 				}
 
 				if(handler != null){
+					System.out.println("handler!!!!!!!!!!");
 					Message m = new Message();
 					Bundle bundle = new Bundle();
 					bundle.putString("msg", msg);

@@ -102,9 +102,12 @@ public class C01Activity extends Activity implements OnClickListener {
 			MainActivity.clientThread.send("StopCall ");
 			
 			stopVS();
+			System.out.println("StopCall C01 Activity!");
 			
 			Intent i = new Intent(this, MainActivity.class);
+			System.out.println("StopCall C01 Activity!2");
 			startActivity(i);
+			System.out.println("StopCall C01 Activity!3");
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -208,6 +211,7 @@ public class C01Activity extends Activity implements OnClickListener {
 		
 		if (isStarted == true) {
 			mMediaService.stopAudio();
+			System.out.println("StopCall C01Activity stopVS");
 			isStarted = false;
 		}
 	}
