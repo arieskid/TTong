@@ -41,6 +41,7 @@ public class ClientThread extends Thread{
 	int destState = 0;
 	String destName;
 	String destPhone;
+	String destSubnetIP;
 
 	public ClientThread(Socket client, Handler handler){
 		this.handler = handler;
@@ -125,6 +126,7 @@ public class ClientThread extends Thread{
 					destState = Integer.valueOf(arr[1]);
 					destName = arr[2];
 					destPhone = arr[3];
+					destSubnetIP = arr[4];
 					
 					Log.d("****", "test ct msg : "+msg);
 
@@ -132,8 +134,8 @@ public class ClientThread extends Thread{
 					Intent i = new Intent(context, CallAskActivity.class);
 					
 					///////// 전화 건 사람의 ip 주소 넘겨주기
-					String callerIp = "192.168.43.11";
-					i.putExtra("callerIp", callerIp);
+					//String callerIp = "192.168.43.11";
+					i.putExtra("callerIp", destSubnetIP);
 					
 					i.putExtra("destState", destState);
 					i.putExtra("destName", destName);
@@ -149,6 +151,7 @@ public class ClientThread extends Thread{
 					destState = Integer.valueOf(arr[1]);
 					destName = arr[2];
 					destPhone = arr[3];
+					destSubnetIP = arr[4];
 					Intent i = null;
 					int myState = MainActivity.pref.getInt("userState", 0);
 					
@@ -208,8 +211,8 @@ public class ClientThread extends Thread{
 					//////////////////
 					// 서버부터 상대방 ip받아서 통화화면으로 넘겨주기
 					//////////////////
-					String destIp = "192.168.43.222"; // 인이 droptop ip
-					i.putExtra("destIp", destIp);
+					//String destIp = null; // 인이 droptop ip
+					i.putExtra("destIp", destSubnetIP);
 					i.putExtra("sendPort", 1988);
 					i.putExtra("recvPort", 1989);
 					i.putExtra("destName", destName);
