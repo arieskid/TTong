@@ -84,16 +84,23 @@ public class MainActivity extends Activity {
 
 				TelephonyManager telManager = (TelephonyManager) getApplicationContext()
 						.getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+				String mySubnetIP="";
 				
 				if(telManager != null){
 					String phoneNum = telManager.getLine1Number();
+					try {
+						mySubnetIP = getLocalIPv4Address();
+					} catch (SocketException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					if(phoneNum != null)
 						phoneNum = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
 					else phoneNum="456-7891-1234";
 
 					try {
 						URL url = new URL(SERVER_ADDRESS + "/ttong_updateIP.php?" + "phone_number="
-								+ URLEncoder.encode(phoneNum, "UTF-8"));
+								+ URLEncoder.encode(phoneNum, "UTF-8") + "&ip_address_sub=" + URLEncoder.encode(mySubnetIP, "UTF-8"));
 						url.openStream();
 
 						String result = getXmlData("updateipresult.xml", "result");
@@ -330,6 +337,19 @@ public class MainActivity extends Activity {
 		}
 
 		return ret;
+	}
+	
+	private String getLocalIPv4Address() throws SocketException {
+		for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+			NetworkInterface intf = en.nextElement();
+			for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+				InetAddress inetAddress = enumIpAddr.nextElement();
+				if (!inetAddress.isLoopbackAddress() && (inetAddress instanceof Inet4Address)) {
+					return inetAddress.getHostAddress().toString();
+				}
+			}
+		}
+		return "null";
 	}
 
 }
