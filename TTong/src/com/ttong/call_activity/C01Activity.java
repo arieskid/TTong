@@ -45,6 +45,7 @@ public class C01Activity extends Activity implements OnClickListener {
 	ImageButton btn_send, btn_stt;
 	EditText editText;
 	LinearLayout ll;
+	TextView callerName, callerPhone;
 	
 	SpeechRecognizer mRecognizer;
 	Intent i, vsi;
@@ -108,6 +109,7 @@ public class C01Activity extends Activity implements OnClickListener {
 			System.out.println("StopCall C01 Activity!2");
 			startActivity(i);
 			System.out.println("StopCall C01 Activity!3");
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

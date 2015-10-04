@@ -87,11 +87,10 @@ public class C10Activity extends Activity{
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
 			MainActivity.clientThread.send("StopCall ");
-			
-			stopVS();
-			
+			stopVS();			
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

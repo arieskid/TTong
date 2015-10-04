@@ -72,11 +72,10 @@ public class C00Activity extends Activity implements OnClickListener{
 	@Override
 	public void onClick(View v) {
 		MainActivity.clientThread.send("StopCall ");
-		
-		stopVS();
-		
+		stopVS();		
 		Intent i = new Intent(this, MainActivity.class);
 		startActivity(i);
+		finish();
 	}
 	
 	public void stopVS(){

@@ -38,7 +38,6 @@ public class LoadingActivity extends Activity{
 			public void run() {
 				Intent i = new Intent(LoadingActivity.this, MainActivity.class);
 				startActivity(i);
-
 				finish();
 			}
 		}, delayTime);

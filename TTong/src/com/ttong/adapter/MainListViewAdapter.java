@@ -104,6 +104,7 @@ public class MainListViewAdapter extends BaseAdapter {
 					intent.putExtra("name", name);
 					intent.putExtra("phone", phone);
 					context.startActivity(intent);
+					((MainActivity)context).finish();
 				}
 			});
 		}

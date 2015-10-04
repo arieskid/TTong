@@ -132,12 +132,11 @@ public class C02Activity extends Activity implements OnInitListener, OnClickList
 
 	@Override
 	public void onClick(View v) {
-		MainActivity.clientThread.send("StopCall ");
-		
-		stopVS();
-		
+		MainActivity.clientThread.send("StopCall ");		
+		stopVS();		
 		Intent i = new Intent(this, MainActivity.class);
 		startActivity(i);
+		finish();
 	}
 	
 	public void stopVS(){

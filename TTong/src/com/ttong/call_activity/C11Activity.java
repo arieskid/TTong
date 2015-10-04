@@ -37,6 +37,7 @@ public class C11Activity extends Activity implements OnClickListener {
 	LinearLayout showText;
 	ImageButton btn_send, btn_stt;
 	EditText editText;
+	TextView callerName, callerPhone;
 	
 	SpeechRecognizer mRecognizer;
 	Intent i;
@@ -91,6 +92,7 @@ public class C11Activity extends Activity implements OnClickListener {
 			MainActivity.clientThread.send("StopCall ");
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

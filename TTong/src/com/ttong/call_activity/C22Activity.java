@@ -36,6 +36,7 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 	ImageButton btn_send, btn_stt;
 	EditText editText;
 	LinearLayout ll;
+	TextView callerName, callerPhone;
 	
 	TextToSpeech tts;
 	Handler handler;
@@ -124,6 +125,7 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 			MainActivity.clientThread.send("StopCall ");
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
