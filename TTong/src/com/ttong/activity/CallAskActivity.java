@@ -120,6 +120,7 @@ public class CallAskActivity extends Activity implements OnClickListener{
 			i.putExtra("recvPort", 1988);
 			
 			startActivity(i);
+			finish();
 		} 
 		
 		// no button

@@ -58,6 +58,7 @@ public class CallLoadingActivity extends Activity{
 			MainActivity.clientThread.send("StopCall ");
 			Intent i = new Intent(this, MainActivity.class);
 			startActivity(i);
+			finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -32,6 +32,7 @@ public class RegisterActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		Log.d("####", "register activity");
 		
 		StrictMode.enableDefaults();
 		super.onCreate(savedInstanceState);
@@ -89,6 +90,7 @@ public class RegisterActivity extends Activity {
 								
 								Intent i = new Intent(RegisterActivity.this, MainActivity.class);
 								startActivity(i);
+								finish();
 							} else 
 								Toast.makeText(RegisterActivity.this, "가입에 실패했습니다. 다시 입력해주세요.", Toast.LENGTH_SHORT).show();
 						} catch (Exception e) {
