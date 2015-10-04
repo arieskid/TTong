@@ -4,22 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="horizontal" >
 
-    <TextView 
-        android:layout_width="15dp"
-        android:layout_height="wrap_content" />
-    
     <ImageView
         android:id="@+id/user_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:layout_gravity="center"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="10dp"
         android:padding="10dp"
         android:src="@drawable/star_non" />
-    
-    <TextView 
-        android:layout_width="15dp"
-        android:layout_height="wrap_content" />
     
     <LinearLayout
         android:layout_width="0dp"
@@ -51,12 +45,9 @@
 		android:scaleType="fitXY"
 		android:gravity="center"
         android:layout_gravity="center"
-		android:layout_margin="10dp"
+		android:layout_marginRight="25dp"
 		android:background="#00000000"
-		android:src="@drawable/btn_call" />
+		android:src="@drawable/ic_call_accept" />
     
-    <TextView 
-        android:layout_width="15dp"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
