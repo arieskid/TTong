@@ -18,7 +18,10 @@ import android.util.Log;
 public class LanAudioRecord extends Thread
 {
 	private final static String TAG = "LanAudioRecord";
-
+	
+	// for C01Activity : vsì™€ sttì˜ micì¤‘ë³µ ë¬¸ì œ.
+	public static boolean flag = true;
+	
 	protected AudioRecord m_in_rec;
 	protected DatagramSocket udp_socket;
 	protected RtpSocket rtp_socket;
@@ -46,7 +49,7 @@ public class LanAudioRecord extends Thread
 
 	public static int m;
 	
-	/** »ØÒôÏû³ı»º³å°ü¸öÊı £¨sipUAÄ¬ÈÏ20£© */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½sipUAÄ¬ï¿½ï¿½20ï¿½ï¿½ */
 	protected int ec_buffer_pkgs = 0;
 
 	public LanAudioRecord(DatagramSocket socket, String destip, int codectype, int destport, int SampleRate,int ec_buffer_size)
@@ -63,8 +66,11 @@ public class LanAudioRecord extends Thread
 		// *************record_init********************
 		int m_in_buf_size = AudioRecord.getMinBufferSize(SampleRate, AudioFormat.CHANNEL_CONFIGURATION_MONO,
 				AudioFormat.ENCODING_PCM_16BIT);
-		m_in_rec = new AudioRecord(MediaRecorder.AudioSource.MIC, SampleRate, AudioFormat.CHANNEL_CONFIGURATION_MONO,
+		
+		if(flag){
+			m_in_rec = new AudioRecord(MediaRecorder.AudioSource.MIC, SampleRate, AudioFormat.CHANNEL_CONFIGURATION_MONO,
 				AudioFormat.ENCODING_PCM_16BIT, m_in_buf_size * 2/* 10 */);
+		}
 
 		System.out.println("Audio recorder m_in_bytes=" + m_in_buf_size);
 
@@ -116,51 +122,65 @@ public class LanAudioRecord extends Thread
 			rtp_socket = new RtpSocket(this.udp_socket, InetAddress.getByName(this.destip), this.destport);
 
 			Log.i(TAG, "rtp send socket port set to: " + this.destport);
-//			Log.i(TAG, "@@@@@¡¡rtp_socket send port is " + rtp_socket.getDatagramSocket().getPort());
+//			Log.i(TAG, "@@@@@ï¿½ï¿½rtp_socket send port is " + rtp_socket.getDatagramSocket().getPort());
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
 		}
-		encoder = new Encoder(this.codectype, ec_buffer_pkgs);
-		encoder.startThread();
-		m_in_rec.startRecording();
+		
+		if(flag){
+			encoder = new Encoder(this.codectype, ec_buffer_pkgs);
+			encoder.startThread();
+			m_in_rec.startRecording();  
+		}
 
 		while (Thread.currentThread() == runner) {
 			long ms = System.currentTimeMillis();
 
 			adjustTransferTime();
-			if (m_in_rec.read(Audio_in, writepos, mFrameSize) <= 0)
-				continue;
+			
+			if(flag){
+				if (m_in_rec.read(Audio_in, writepos, mFrameSize) <= 0)
+					continue;
+			}
+			
 			// Decline Volume to half
 			calc2(Audio_in, writepos, mFrameSize);
-			/* % È¡ÓàÎªÁË·ÀÖ¹·ÃÎÊAudio_in[] Êı×éÔ½½ç,Æğµ½Ñ­»·Ğ´ÈëµÄ×÷ÓÃ */
+			/* % È¡ï¿½ï¿½Îªï¿½Ë·ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½Audio_in[] ï¿½ï¿½ï¿½ï¿½Ô½ï¿½ï¿½,ï¿½ï¿½Ñ­ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 			writepos = (writepos + mFrameSize) % (mFrameSize * (mFrameRate + 1));
 
-			if (encoder.isIdle()) {/* encoder¿ÕÏĞÊ±²ÅĞ´Èë£¬Ê¹ÓÃreadpos£¬·ÀÖ¹Êı¾İ¶ªÊ§£¨ÊÇ·ñÔì³ÉÑÓ³Ù£¿£¿£© */
-				encoder.putData(System.currentTimeMillis(), Audio_in, readpos, mFrameSize);
-				readpos = (readpos + mFrameSize) % (mFrameSize * (mFrameRate + 1));
+			if(flag){
+				if (encoder.isIdle()) {/* encoderï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ğ´ï¿½ë£¬Ê¹ï¿½ï¿½readposï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½İ¶ï¿½Ê§ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ó³Ù£ï¿½ï¿½ï¿½ï¿½ï¿½ */
+					encoder.putData(System.currentTimeMillis(), Audio_in, readpos, mFrameSize);
+					readpos = (readpos + mFrameSize) % (mFrameSize * (mFrameRate + 1));
+				}
 			}
+			
 			if (muteflag == false) {
 				/* if(encoder.isGetData()) */
-				while (encoder.isGetData()) /* µ±±àÂëÆ÷ÖĞÓĞÊı¾İµÄÊ±ºò£¬¾Í½«ÆäÈ¡³öÍ¨¹ırtp·¢ËÍ³öÈ¥ */
-				{
-					try {
-						byte[] temp = encoder.getData();
-						System.arraycopy(temp, RtpheadSize, buffer, RtpheadSize, temp.length - RtpheadSize);
-						rtp_packet.setPayloadLength(temp.length - RtpheadSize);
+				
+				if(flag){
+					while (encoder.isGetData()) /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İµï¿½Ê±ï¿½ò£¬¾Í½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Í¨ï¿½ï¿½rtpï¿½ï¿½ï¿½Í³ï¿½È¥ */
+					{
+						try {
+							byte[] temp = encoder.getData();
+							System.arraycopy(temp, RtpheadSize, buffer, RtpheadSize, temp.length - RtpheadSize);
+							rtp_packet.setPayloadLength(temp.length - RtpheadSize);
 
-						// Log.d(TAG,
-						// "Payload length is "+(temp.length-RtpheadSize));
-						rtp_packet.setSequenceNumber(seqn++);
-						rtp_packet.setTimestamp(time);
-						rtp_socket.send(rtp_packet);
-						if (codectype == 9)
-							time += mFrameSize / 2;
-						else
-							time += mFrameSize;
-					} catch (IOException e) {
-						e.printStackTrace();
+							// Log.d(TAG,
+							// "Payload length is "+(temp.length-RtpheadSize));
+							rtp_packet.setSequenceNumber(seqn++);
+							rtp_packet.setTimestamp(time);
+							rtp_socket.send(rtp_packet);
+							if (codectype == 9)
+								time += mFrameSize / 2;
+							else
+								time += mFrameSize;
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 					}
 				}
+				
 			}
 			Log.e(TAG, "One time record time is " + (System.currentTimeMillis() - ms));
 		}
@@ -217,7 +237,10 @@ public class LanAudioRecord extends Thread
 	private void free()
 	{
 		Log.i(TAG, "LanAudioRecod free");
-		m_in_rec.stop();
-		encoder.stopThread();
+		
+		if(flag){
+			m_in_rec.stop();
+			encoder.stopThread();
+		}
 	}
 }

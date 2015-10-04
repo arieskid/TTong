@@ -89,7 +89,7 @@ public class MainActivity extends Activity {
 					String phoneNum = telManager.getLine1Number();
 					if(phoneNum != null)
 						phoneNum = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
-					else phoneNum="123-4567-9123";
+					else phoneNum="456-7891-1234";
 
 					try {
 						URL url = new URL(SERVER_ADDRESS + "/ttong_updateIP.php?" + "phone_number="
@@ -151,7 +151,7 @@ public class MainActivity extends Activity {
 
 	@Override
 	public void onBackPressed() {
-		//super.onBackPressed();
+		 super.onBackPressed();
          this.finish();
          android.os.Process.killProcess(android.os.Process.myPid());
          System.exit(0);
@@ -182,7 +182,10 @@ public class MainActivity extends Activity {
 		final Handler handler = new Handler();
 		TelephonyManager telManager = (TelephonyManager)getApplicationContext().getSystemService(getApplicationContext().TELEPHONY_SERVICE);
 		String phoneNum = telManager.getLine1Number();
-		final String userPhone = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
+		final String userPhone;
+		if(phoneNum != null)
+			userPhone = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
+		else userPhone = "456-7891-1234";
 				
         runOnUiThread(new Runnable() {
         	

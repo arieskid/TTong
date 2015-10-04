@@ -41,7 +41,7 @@ public class MediaService extends Service
 	public void startAudio(String Destaddr, int codecType, int SampleRate, int SendRtpPort,int RecvRtpPort,int ec_buffer_pkgs)
 	{
 		Log.d(TAG, "startAudio()");
-		try {//  udp½ÓÊÕsocket
+		try {//  udpï¿½ï¿½ï¿½ï¿½socket
 			if (udp_recv_socket == null)
 				udp_recv_socket = new DatagramSocket(RecvRtpPort/* 5071 */);//   udp recieve socket port
 			Log.d(TAG, "new udp recvice socket port is " + udp_recv_socket.getPort());
@@ -49,6 +49,7 @@ public class MediaService extends Service
 			e.printStackTrace();
 		}
 		
+/// ### ///
 		try {
 			if (udp_send_socket == null)
 				udp_send_socket = new DatagramSocket(SendRtpPort);//  udp send socket port
@@ -56,10 +57,10 @@ public class MediaService extends Service
 		} catch (SocketException e) {
 			e.printStackTrace();
 		}
-		
+/// ### ///		
 		
 		/*
-		 *    »ØÒôÏû³ý,²ÉÓÃspeex¿âµÄ    
+		 *    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½speexï¿½ï¿½ï¿½    
 		 * echo cancellation
 		 * public native int echoinit(int framesize,int filterlength);
 		 * public native int echoplayback(short[] play);

@@ -71,6 +71,7 @@ public class C20Activity extends Activity implements OnClickListener {
 		btn_stt.setLayoutParams(params);
 		btn_send.setOnClickListener(this);
 		
+		MainActivity.clientThread.setContext(this);
 		startVS();
 	}
 	

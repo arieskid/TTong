@@ -66,6 +66,7 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 			}
 		};
 		
+		MainActivity.clientThread.setContext(this);
 		MainActivity.clientThread.changeHandler(handler);
 	}
 	

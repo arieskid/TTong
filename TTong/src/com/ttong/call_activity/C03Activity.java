@@ -74,6 +74,7 @@ public class C03Activity extends Activity implements OnClickListener, OnInitList
         mRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         mRecognizer.setRecognitionListener(listener);
         
+        MainActivity.clientThread.setContext(this);
         MainActivity.clientThread.changeHandler(handler);
 
         i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);

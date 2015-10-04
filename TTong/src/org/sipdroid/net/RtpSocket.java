@@ -88,6 +88,8 @@ public class RtpSocket {
 //		Log.i(TAG,"RtpSocket receive : "+datagram.getLength());
 	}
 
+	
+///////#######///////	
 	/** Sends a RTP packet from this socket */
 	public void send(RtpPacket rtpp) throws IOException {
 		datagram.setData(rtpp.packet);
@@ -99,6 +101,7 @@ public class RtpSocket {
 		ms=System.currentTimeMillis();
 //		Log.i(TAG,"RtpSocket send : "+rtpp.packet_len);
 	}
+///////#######///////
 
 	/** Closes this socket */
 	public void close() { // socket.close();

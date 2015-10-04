@@ -36,7 +36,7 @@ public class ClientThread extends Thread{
 	Handler handler;
 	Context context;
 
-	int activityNum;
+	int activityNum = -1;
 	
 	int destState = 0;
 	String destName;
@@ -114,6 +114,9 @@ public class ClientThread extends Thread{
 			while(true){
 				msg = bufferReader.readLine();
 
+				if(msg == null)
+					continue;
+				
 				// when receive call
 				if(msg.startsWith("StartCall ")){
 					// change the activity according to it and its destination's state
@@ -129,7 +132,7 @@ public class ClientThread extends Thread{
 					Intent i = new Intent(context, CallAskActivity.class);
 					
 					///////// 전화 건 사람의 ip 주소 넘겨주기
-					String callerIp = "10.200.4.59";
+					String callerIp = "192.168.43.11";
 					i.putExtra("callerIp", callerIp);
 					
 					i.putExtra("destState", destState);
@@ -153,6 +156,7 @@ public class ClientThread extends Thread{
 					Log.d("***", "test ct dest : "+String.valueOf(destState));
 					
 					activityNum = destState + (myState*10);
+					Log.e("####", "OkayCall : "+ activityNum);
 				
 					switch(activityNum){
 					case 0:
@@ -204,7 +208,7 @@ public class ClientThread extends Thread{
 					//////////////////
 					// 서버부터 상대방 ip받아서 통화화면으로 넘겨주기
 					//////////////////
-					String destIp = "10.200.38.203"; // 인이 droptop ip
+					String destIp = "192.168.43.222"; // 인이 droptop ip
 					i.putExtra("destIp", destIp);
 					i.putExtra("sendPort", 1988);
 					i.putExtra("recvPort", 1989);
@@ -217,6 +221,8 @@ public class ClientThread extends Thread{
 				else if(msg.startsWith("StopCall ")){
 					// return main activity
 					client.close();
+					
+					Log.e("####", "StopCall : "+ activityNum);
 					
 					switch(activityNum){
 					case 0:
@@ -234,6 +240,7 @@ public class ClientThread extends Thread{
 					case 20: case 21:
 						((C20Activity)context).stopVS();
 						break;
+						
 					}
 
 //					if(context instanceof C00Activity){

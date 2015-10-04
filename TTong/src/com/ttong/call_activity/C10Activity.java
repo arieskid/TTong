@@ -69,6 +69,7 @@ public class C10Activity extends Activity{
 			}
 		};
 		
+		MainActivity.clientThread.setContext(this);
 		startVS();
 		
 		// test!!!!!!!

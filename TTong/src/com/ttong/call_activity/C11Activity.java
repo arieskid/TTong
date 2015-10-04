@@ -65,6 +65,7 @@ public class C11Activity extends Activity implements OnClickListener {
 		
 		// test!!!!!!!
 		MainActivity.clientThread.changeHandler(handler);
+		MainActivity.clientThread.setContext(this);
 		
 		mRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
         mRecognizer.setRecognitionListener(listener);

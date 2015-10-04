@@ -33,6 +33,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import jay.media.LanAudioRecord;
 import jay.media.MediaService;
 
 // me : 0(not disabled)
@@ -60,6 +61,8 @@ public class C01Activity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.call_edit_text);
 		
+		LanAudioRecord.flag = false;
+		
 		btn_stt = (ImageButton) findViewById(R.id.micBtn);
 		btn_send = (ImageButton) findViewById(R.id.sendBtn);
 		editText = (EditText) findViewById(R.id.textEt);
@@ -82,6 +85,7 @@ public class C01Activity extends Activity implements OnClickListener {
 		btn_send.setOnClickListener(this);
         btn_stt.setOnClickListener(this);
         
+        MainActivity.clientThread.setContext(this);
         startVS();
 	}
 	
@@ -104,13 +108,6 @@ public class C01Activity extends Activity implements OnClickListener {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-	public void stopVS(){
-		if (isStarted == true) {
-			mMediaService.stopAudio();
-			isStarted = false;
-		}
 	}
 	
 	private RecognitionListener listener = new RecognitionListener() {
@@ -204,6 +201,15 @@ public class C01Activity extends Activity implements OnClickListener {
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
 		tv.setLayoutParams(params);
 		ll.addView(tv);
+	}
+	
+	public void stopVS(){
+		LanAudioRecord.flag = true;
+		
+		if (isStarted == true) {
+			mMediaService.stopAudio();
+			isStarted = false;
+		}
 	}
 	
 	public void startVS(){

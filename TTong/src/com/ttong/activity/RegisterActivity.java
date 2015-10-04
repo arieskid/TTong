@@ -45,7 +45,7 @@ public class RegisterActivity extends Activity {
 		String phoneNum = telManager.getLine1Number();
 		
 		if(phoneNum == null){
-			phoneET.setText("123-4567-9123");
+			phoneET.setText("456-7891-1234");
 		}
 		else phoneET.setText(phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11));
 		
