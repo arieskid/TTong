@@ -168,6 +168,16 @@ public class MainActivity extends Activity {
 					clientThread = new ClientThread(client, null);
 					clientThread.setContext(context);
 					clientThread.start();
+					
+					TelephonyManager telManager = (TelephonyManager) getApplicationContext()
+							.getSystemService(getApplicationContext().TELEPHONY_SERVICE);
+					String phoneNum = telManager.getLine1Number();
+					if(phoneNum != null)
+						phoneNum = phoneNum.substring(0, 3) + "-" + phoneNum.substring(3, 7) + "-" + phoneNum.substring(7, 11);
+					else phoneNum="456-7891-1234";
+					
+					clientThread.send("MyPhone "+phoneNum);
+					
 				}catch(UnknownHostException e){
 					e.printStackTrace();
 				}catch(IOException e){

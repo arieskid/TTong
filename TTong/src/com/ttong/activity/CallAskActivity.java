@@ -125,6 +125,9 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		// no button
 		else if(v.getId() == R.id.callReject){
 			MainActivity.clientThread.send("StopCall ");
+
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
 		}
 	}
 }
