@@ -129,7 +129,7 @@ public class ClientThread extends Thread{
 					Intent i = new Intent(context, CallAskActivity.class);
 					
 					///////// 전화 건 사람의 ip 주소 넘겨주기
-					String callerIp = "192.168.0.7";
+					String callerIp = "10.200.4.59";
 					i.putExtra("callerIp", callerIp);
 					
 					i.putExtra("destState", destState);
@@ -204,7 +204,7 @@ public class ClientThread extends Thread{
 					//////////////////
 					// 서버부터 상대방 ip받아서 통화화면으로 넘겨주기
 					//////////////////
-					String destIp = "192.168.0.15"; // 인이 droptop ip
+					String destIp = "10.200.38.203"; // 인이 droptop ip
 					i.putExtra("destIp", destIp);
 					i.putExtra("sendPort", 1988);
 					i.putExtra("recvPort", 1989);
