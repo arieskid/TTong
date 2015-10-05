@@ -141,6 +141,7 @@ public class ClientThread extends Thread{
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
 					context.startActivity(i);
+					((MainActivity)context).finish();
 				}
 				// when destination answer the call. - when i call and receiver answered.
 				else if(msg.startsWith("OkayCall ")){
@@ -206,6 +207,7 @@ public class ClientThread extends Thread{
 							i = new Intent(context, C30Activity.class);
 							Log.d("****", "test ct : 30");
 							break;
+						default: break;
 					}
 					
 					//////////////////
@@ -219,7 +221,7 @@ public class ClientThread extends Thread{
 					i.putExtra("destPhone", destPhone);
 					msg = null;
 					context.startActivity(i);
-					
+					((CallLoadingActivity)context).finish();
 				}
 				else if(msg.startsWith("StopCall ")){
 					// return main activity
@@ -229,20 +231,37 @@ public class ClientThread extends Thread{
 					switch(activityNum){
 						case 0:
 							((C00Activity)context).stopVS();
+							((C00Activity)context).finish();
 							break;
 						case 1:
 							((C01Activity)context).stopVS();
-							Log.d("####", "client Thread stopVS");
+							((C01Activity)context).finish();
 							break;
 						case 2:
 							((C02Activity)context).stopVS();
+							((C02Activity)context).finish();
 							break;
 						case 10: case 12:
 							((C10Activity)context).stopVS();
+							((C10Activity)context).finish();
 							break;
 						case 20: case 21:
 							((C20Activity)context).stopVS();
+							((C20Activity)context).finish();
 							break;
+						case 3:
+							((C03Activity)context).finish();
+							break;
+						case 11: case 13:
+							((C11Activity)context).finish();
+							break;
+						case 22: case 23:
+							((C22Activity)context).finish();
+							break;
+						case 30: case 31: case 32: case 33:
+							((C30Activity)context).finish();
+							break;
+						default: break;
 					}
 
 //					if(context instanceof C00Activity){

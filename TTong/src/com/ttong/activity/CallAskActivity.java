@@ -118,6 +118,7 @@ public class CallAskActivity extends Activity implements OnClickListener{
 					i = new Intent(this, C30Activity.class);
 					Log.d("****", "test callask : 30");
 					break;
+				default: break;
 			}
 			
 			MainActivity.clientThread.send("OkayCall "+"/"+myState+"/"+myName+"/"+myPhone);
