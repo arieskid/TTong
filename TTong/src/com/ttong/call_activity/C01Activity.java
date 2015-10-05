@@ -83,8 +83,6 @@ public class C01Activity extends Activity implements OnClickListener {
 		recvPort = vsi.getExtras().getInt("recvPort");
 		sendPort = 12345;
 		
-		
-		
 		// for showing the partner information.
 		callerName = (TextView) findViewById(R.id.callerName);
 		callerPhone = (TextView) findViewById(R.id.callerPhone);
@@ -92,13 +90,16 @@ public class C01Activity extends Activity implements OnClickListener {
 		callerPhone.setText(vsi.getExtras().getString("destPhone"));
 		
 		
-		
-		
 		btn_send.setOnClickListener(this);
         btn_stt.setOnClickListener(this);
         
         MainActivity.clientThread.setContext(this);
         startVS();
+	}
+	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
 	}
 	
 	@Override

@@ -57,7 +57,6 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 		btn_send.setOnClickListener(this);
 		tts = new TextToSpeech(this, this);
 		
-		
 		// for showing the partner information.
         Intent vsi = getIntent();
      	callerName = (TextView) findViewById(R.id.callerName);
@@ -78,6 +77,11 @@ public class C22Activity extends Activity implements OnClickListener, OnInitList
 		
 		MainActivity.clientThread.setContext(this);
 		MainActivity.clientThread.changeHandler(handler);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
 	}
 	
 	private void speakOut(String text) {

@@ -70,6 +70,11 @@ public class C00Activity extends Activity implements OnClickListener{
 	}
 
 	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
+	
+	@Override
 	public void onClick(View v) {
 		MainActivity.clientThread.send("StopCall ");
 		stopVS();		

@@ -52,4 +52,9 @@ public class LoadingActivity extends Activity{
 	protected void onDestroy() {
 		super.onDestroy();
 	}
+	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
 }

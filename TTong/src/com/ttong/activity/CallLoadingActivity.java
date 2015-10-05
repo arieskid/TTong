@@ -63,4 +63,9 @@ public class CallLoadingActivity extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
 }

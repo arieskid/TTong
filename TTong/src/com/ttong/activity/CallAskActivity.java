@@ -57,7 +57,11 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		name.setText(destName);
 		phone.setText(destPhone);
 	}
-
+	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
 
 	@Override
 	public void onClick(View v) {

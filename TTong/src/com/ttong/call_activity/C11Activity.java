@@ -89,6 +89,11 @@ public class C11Activity extends Activity implements OnClickListener {
 	}
 	
 	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.call, menu);
 		return true;

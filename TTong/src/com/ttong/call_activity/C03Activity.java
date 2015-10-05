@@ -82,17 +82,20 @@ public class C03Activity extends Activity implements OnClickListener, OnInitList
         i.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE,"ko-KR");
         
-        
         // for showing the partner information.
         Intent vsi = getIntent();
      	callerName = (TextView) findViewById(R.id.callerName);
      	callerPhone = (TextView) findViewById(R.id.callerPhone);
      	callerName.setText(vsi.getExtras().getString("destName"));
      	callerPhone.setText(vsi.getExtras().getString("destPhone"));
-        
 		
 		btn_send.setOnClickListener(this);
         btn_stt.setOnClickListener(this);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
 	}
 	
 	private void speakOut(String text) {

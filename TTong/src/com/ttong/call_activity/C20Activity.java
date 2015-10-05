@@ -86,6 +86,11 @@ public class C20Activity extends Activity implements OnClickListener {
 	}
 	
 	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
+	
+	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.sendBtn){
 			String str = editText.getText().toString();

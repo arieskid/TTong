@@ -87,6 +87,11 @@ public class C02Activity extends Activity implements OnInitListener, OnClickList
 		MainActivity.clientThread.changeHandler(handler);
 	}
 	
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
+	
 	private void speakOut(String text) {
         if (text.length() == 0) {
         	

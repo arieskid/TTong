@@ -44,15 +44,13 @@ public class C30Activity extends Activity implements OnClickListener {
 		btn_send = (ImageButton) findViewById(R.id.sendBtn);
 		editText = (EditText) findViewById(R.id.textEt);
 		showText = (LinearLayout) findViewById(R.id.showText);
-		
-		
+				
 		// for showing the partner information.
         Intent vsi = getIntent();
      	callerName = (TextView) findViewById(R.id.callerName);
      	callerPhone = (TextView) findViewById(R.id.callerPhone);
      	callerName.setText(vsi.getExtras().getString("destName"));
      	callerPhone.setText(vsi.getExtras().getString("destPhone"));
-		
 		
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
 		params.weight=0;
@@ -75,6 +73,11 @@ public class C30Activity extends Activity implements OnClickListener {
 		MainActivity.clientThread.changeHandler(handler);
 	}
 
+	@Override
+	public void onBackPressed() {
+		//super.onBackPressed();
+	}
+	
 	@Override
 	public void onClick(View v) {
 		if(v.getId()==R.id.sendBtn){
