@@ -59,6 +59,15 @@ public class C10Activity extends Activity{
 		sendPort = i.getExtras().getInt("sendPort");
 		recvPort = 54321;
 		
+		
+		// for showing the partner information.
+        Intent vsi = getIntent();
+     	TextView callerName = (TextView) findViewById(R.id.callerName);
+     	TextView callerPhone = (TextView) findViewById(R.id.callerPhone);
+     	callerName.setText(vsi.getExtras().getString("destName"));
+     	callerPhone.setText(vsi.getExtras().getString("destPhone"));
+		
+		
 		// 이거 맞음?
 		handler = new Handler(){
 			public void handleMessage(Message msg){
@@ -106,14 +115,14 @@ public class C10Activity extends Activity{
 	public void showText(String str){
 		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
 		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());
-		int dp_15 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
+		int dp_7 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, this.getResources().getDisplayMetrics());
 		
 		TextView tv = new TextView(this);
 		tv.setText(str);
 		tv.setTextColor(color.Indigo8);
 		tv.setPadding(dp_10, dp_5, 0, dp_5);
 		tv.setGravity(Gravity.LEFT);
-		tv.setTextSize(dp_15);
+		tv.setTextSize(dp_7);
 		
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT);
 		tv.setLayoutParams(params);

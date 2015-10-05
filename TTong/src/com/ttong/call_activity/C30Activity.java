@@ -45,6 +45,15 @@ public class C30Activity extends Activity implements OnClickListener {
 		editText = (EditText) findViewById(R.id.textEt);
 		showText = (LinearLayout) findViewById(R.id.showText);
 		
+		
+		// for showing the partner information.
+        Intent vsi = getIntent();
+     	callerName = (TextView) findViewById(R.id.callerName);
+     	callerPhone = (TextView) findViewById(R.id.callerPhone);
+     	callerName.setText(vsi.getExtras().getString("destName"));
+     	callerPhone.setText(vsi.getExtras().getString("destPhone"));
+		
+		
 		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.MATCH_PARENT);
 		params.weight=0;
 		btn_stt.setLayoutParams(params);
@@ -99,12 +108,12 @@ public class C30Activity extends Activity implements OnClickListener {
 		
 		int dp_5 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 5, this.getResources().getDisplayMetrics());
 		int dp_10 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, this.getResources().getDisplayMetrics());
-		int dp_15 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 15, this.getResources().getDisplayMetrics());
+		int dp_7 = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 7, this.getResources().getDisplayMetrics());
 		
 		TextView tv = new TextView(this);
 		tv.setText(str);
 		tv.setTextColor(color.Indigo8);
-		tv.setTextSize(dp_15);
+		tv.setTextSize(dp_7);
 		LinearLayout.LayoutParams params = null;
 		
 		// send text

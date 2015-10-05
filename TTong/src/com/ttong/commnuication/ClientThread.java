@@ -217,6 +217,7 @@ public class ClientThread extends Thread{
 					i.putExtra("recvPort", 1989);
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
+					//i.putExtra("", value);
 					msg = null;
 					context.startActivity(i);
 					
