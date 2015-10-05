@@ -27,11 +27,13 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
 
 import android.telephony.TelephonyManager;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -256,17 +258,21 @@ public class MainActivity extends Activity {
 		return ret;
 	}
 
+	
 	private String getLocalIPv4Address() throws SocketException {
-		for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
-			NetworkInterface intf = en.nextElement();
-			for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
-				InetAddress inetAddress = enumIpAddr.nextElement();
-				if (!inetAddress.isLoopbackAddress() && (inetAddress instanceof Inet4Address)) {
-					return inetAddress.getHostAddress().toString();
-				}
-			}
-		}
-		return "null";
+//		for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+//			NetworkInterface intf = en.nextElement();
+//			for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+//				InetAddress inetAddress = enumIpAddr.nextElement();
+//				if (!inetAddress.isLoopbackAddress() && (inetAddress instanceof Inet4Address)) {
+//					return inetAddress.getHostAddress().toString();
+//				}
+//			}
+//		}
+//		return "null";
+		WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+		String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+		return ip;
 	}
 
 
