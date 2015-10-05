@@ -76,7 +76,12 @@ public class CallAskActivity extends Activity implements OnClickListener{
 		
 		// ok button
 		if(v.getId() == R.id.callAgree){
-			switch(destState + (myState*10)){
+			
+			int num = destState + (myState*10);
+			MainActivity.clientThread.activityNum = num; 
+			Log.d("####", "CallAsk : "+ num);
+			
+			switch(num){
 				case 0:
 					i = new Intent(this, C00Activity.class);
 					Log.d("****", "test callask : 0");

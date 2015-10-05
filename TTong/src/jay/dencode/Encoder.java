@@ -118,7 +118,7 @@ public class Encoder implements Runnable
 				
 				// Lod
 				
-				Log.e(TAG, "Encoder time = " + (System.currentTimeMillis() - time));
+				//Log.e(TAG, "Encoder time = " + (System.currentTimeMillis() - time));
 
 				// Log.i(TAG, ""+leftSize
 				// +" size data after encode is "+getSize);
@@ -130,7 +130,7 @@ public class Encoder implements Runnable
 
 			}
 
-			Log.e(TAG, "One time encode time is " + (System.currentTimeMillis() - ms));
+			//Log.e(TAG, "One time encode time is " + (System.currentTimeMillis() - ms));
 		}
 		free();
 	}

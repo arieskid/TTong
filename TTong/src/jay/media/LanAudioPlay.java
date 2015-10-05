@@ -32,22 +32,22 @@ public class LanAudioPlay extends Thread
 	protected int m, vm = 1;
 
 	// speech preprocessor
-	/** µ±Ç°»ñÈ¡µÄÐòÁÐºÅ */
+	/** ï¿½ï¿½Ç°ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½ */
 	protected int gseq = 0;
 
-	/** ÉÏÒ»´ÎÓÐÐ§ÐòÁÐºÅ */
+	/** ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ðºï¿½ */
 	protected int currentseq = 0;
 
 	/**
-	 * µ±Ç°»ñÈ¡µ½ÐòÁÐºÅµÄµÍ°ËÎ» getseq = gseq & 0xff;
+	 * ï¿½ï¿½Ç°ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ÐºÅµÄµÍ°ï¿½Î» getseq = gseq & 0xff;
 	 */
 	protected int getseq;
 	protected int expseq;
 
-	/** »ñÈ¡µÄÁ½´ÎÐòÁÐºÅ²î £¨¿ÕÏ¶£© */
+	/** ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐºÅ²ï¿½ ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ */
 	protected int gap;
 
-	/** »ØÒôÏû³ý»º³å°ü¸öÊý £¨sipUAÄ¬ÈÏ20£© */
+	/** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½sipUAÄ¬ï¿½ï¿½20ï¿½ï¿½ */
 	protected int ec_buffer_pkgs = 0;
 
 	public static float good, late, lost, loss, loss2;
@@ -114,7 +114,7 @@ public class LanAudioPlay extends Thread
 
 		Log.d(TAG, "#### 1");
 		try {
-			rtp_socket.receive(rtp_packet);// ½ÓÊÕRtpÊý¾ÝÁ÷
+			rtp_socket.receive(rtp_packet);// ï¿½ï¿½ï¿½ï¿½Rtpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			Log.i(TAG, "@@@@@@@@ rtp_socket receive port: " + rtp_socket.getDatagramSocket().getPort());
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -131,34 +131,34 @@ public class LanAudioPlay extends Thread
 			long ms = System.currentTimeMillis();
 
 			try {
-				rtp_socket.receive(rtp_packet);// ½ÓÊÕRtpÊý¾ÝÁ÷
+				rtp_socket.receive(rtp_packet);// ï¿½ï¿½ï¿½ï¿½Rtpï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
-			gseq = rtp_packet.getSequenceNumber();// rtp°üÐòÁÐºÅ[]
+			gseq = rtp_packet.getSequenceNumber();// rtpï¿½ï¿½ï¿½ï¿½ï¿½Ðºï¿½[]
 													// rtp_packet.setSequenceNumber(seqn++)
-			if (currentseq == gseq) {// ÉÏÒ»´ÎÓÐÐ§ÐòÁÐºÅ
+			if (currentseq == gseq) {// ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ð§ï¿½ï¿½ï¿½Ðºï¿½
 				m++;
 				continue;
 			}
 			lostandgood();
-			// Log.d("LanAudioPlay", "lost:" + lost+" good:"+good);// ¶ª°üÂÊ£¿
+			// Log.d("LanAudioPlay", "lost:" + lost+" good:"+good);// ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½
 
 			if (decoder.isIdle()) {
-				decoder.putData(System.currentTimeMillis(), buffer, Rtphead, rtp_packet.getPayloadLength());// Ð´Èë½âÂë»º³å
+				decoder.putData(System.currentTimeMillis(), buffer, Rtphead, rtp_packet.getPayloadLength());// Ð´ï¿½ï¿½ï¿½ï¿½ë»ºï¿½ï¿½
 				// Log.i(TAG, "Write " + rtp_packet.getPayloadLength() +
 				// " size data to decoder");
 			}
 
 			// if (decoder.isGetData() == true) {
-			while (decoder.isGetData() == true) {/* µ±½âÂëÆ÷ÖÐÓÐÊý¾ÝµÄÊ±ºò£¬¾Í½«ÆäÈ¡³ö */
+			while (decoder.isGetData() == true) {/* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ýµï¿½Ê±ï¿½ò£¬¾Í½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ */
 				short[] s_bytes_pkg = decoder.getData().clone();
-				m_out_trk.write(s_bytes_pkg, 0, s_bytes_pkg.length);// Ð´Èë²¥·Å»º³å
+				m_out_trk.write(s_bytes_pkg, 0, s_bytes_pkg.length);// Ð´ï¿½ë²¥ï¿½Å»ï¿½ï¿½ï¿½
 			}
-			Log.e(TAG, " ²¥·ÅÊý¾ÝÐ´ÈëÒ»´ÎÊ±¼ä   " + (System.currentTimeMillis() - ms));
+			//Log.e(TAG, " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½Ò»ï¿½ï¿½Ê±ï¿½ï¿½   " + (System.currentTimeMillis() - ms));
 		}
-		Log.d("LanAudioPlay", "lost:" + lost + " good:" + good);// ¶ª°üÂÊ£¿
+		Log.d("LanAudioPlay", "lost:" + lost + " good:" + good);// ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½
 	}
 
 	void empty()

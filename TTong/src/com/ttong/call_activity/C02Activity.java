@@ -84,6 +84,7 @@ public class C02Activity extends Activity implements OnInitListener, OnClickList
 		};
 		
 		// test!!!!!!!
+		MainActivity.clientThread.setContext(this);
 		MainActivity.clientThread.changeHandler(handler);
 	}
 	

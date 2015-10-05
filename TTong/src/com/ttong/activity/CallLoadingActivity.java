@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -30,6 +31,10 @@ public class CallLoadingActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_call_loading);
+		
+		Log.d("#### 1", MainActivity.pref.toString());
+		Log.d("#### 2", MainActivity.clientThread.toString());
+		Log.d("#### 3", this.toString());
 		
 		MainActivity.clientThread.setContext(this);
 		MainActivity.clientThread.send("StartCall ");

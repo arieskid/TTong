@@ -86,7 +86,7 @@ public class MediaService extends Service
 			m_iRecord.startThread();
 		}
 		if (m_iPlay == null) {
-			Log.d(TAG, "LanAudioPlay udp_socket port is " + udp_recv_socket.getPort());
+			//Log.d(TAG, "LanAudioPlay udp_socket port is " + udp_recv_socket.getPort());
 			m_iPlay = new LanAudioPlay(udp_recv_socket, codecType, SampleRate,ec_buffer_pkgs);
 			m_iPlay.startThread();
 		} else {

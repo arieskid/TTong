@@ -36,7 +36,7 @@ public class ClientThread extends Thread{
 	Handler handler;
 	Context context;
 
-	int activityNum = -1;
+	public static int activityNum = -1;
 	
 	int destState = 0;
 	String destName;
@@ -159,53 +159,53 @@ public class ClientThread extends Thread{
 					Log.d("***", "test ct dest : "+String.valueOf(destState));
 					
 					activityNum = destState + (myState*10);
-					Log.e("####", "OkayCall : "+ activityNum);
+					Log.d("####", "OkayCall : "+ activityNum);
 				
 					switch(activityNum){
-					case 0:
-						i = new Intent(context, C00Activity.class);
-						Log.d("****", "test ct : 0");
-						break;
-
-					case 1:
-						i = new Intent(context, C01Activity.class);
-						Log.d("****", "test ct : 1");
-						break;
-
-					case 2:
-						i = new Intent(context, C02Activity.class);
-						Log.d("****", "test ct : 2");
-						break;
-
-					case 3:
-						i = new Intent(context, C03Activity.class);
-						Log.d("****", "test ct : 3");
-						break;
-
-					case 10: case 12:
-						i = new Intent(context, C10Activity.class);
-						Log.d("****", "test ct : 10");
-						break;
-
-					case 11: case 13:
-						i = new Intent(context, C11Activity.class);
-						Log.d("****", "test ct : 11");
-						break;
-
-					case 20: case 21:
-						i = new Intent(context, C20Activity.class);
-						Log.d("****", "test ct : 20");
-						break;
-
-					case 22: case 23:
-						i = new Intent(context, C22Activity.class);
-						Log.d("****", "test ct : 22");
-						break;
-
-					case 30: case 31: case 32: case 33:
-						i = new Intent(context, C30Activity.class);
-						Log.d("****", "test ct : 30");
-						break;
+						case 0:
+							i = new Intent(context, C00Activity.class);
+							Log.d("****", "test ct : 0");
+							break;
+	
+						case 1:
+							i = new Intent(context, C01Activity.class);
+							Log.d("****", "test ct : 1");
+							break;
+	
+						case 2:
+							i = new Intent(context, C02Activity.class);
+							Log.d("****", "test ct : 2");
+							break;
+	
+						case 3:
+							i = new Intent(context, C03Activity.class);
+							Log.d("****", "test ct : 3");
+							break;
+	
+						case 10: case 12:
+							i = new Intent(context, C10Activity.class);
+							Log.d("****", "test ct : 10");
+							break;
+	
+						case 11: case 13:
+							i = new Intent(context, C11Activity.class);
+							Log.d("****", "test ct : 11");
+							break;
+	
+						case 20: case 21:
+							i = new Intent(context, C20Activity.class);
+							Log.d("****", "test ct : 20");
+							break;
+	
+						case 22: case 23:
+							i = new Intent(context, C22Activity.class);
+							Log.d("****", "test ct : 22");
+							break;
+	
+						case 30: case 31: case 32: case 33:
+							i = new Intent(context, C30Activity.class);
+							Log.d("****", "test ct : 30");
+							break;
 					}
 					
 					//////////////////
@@ -217,7 +217,6 @@ public class ClientThread extends Thread{
 					i.putExtra("recvPort", 1989);
 					i.putExtra("destName", destName);
 					i.putExtra("destPhone", destPhone);
-					//i.putExtra("", value);
 					msg = null;
 					context.startActivity(i);
 					
@@ -225,26 +224,25 @@ public class ClientThread extends Thread{
 				else if(msg.startsWith("StopCall ")){
 					// return main activity
 					
-					Log.e("####", "StopCall : "+ activityNum);
+					Log.e("####", "StopCall 상대방이 눌렀을 때 : "+ activityNum);
 					
 					switch(activityNum){
-					case 0:
-						((C00Activity)context).stopVS();
-						break;
-					case 1:
-						((C01Activity)context).stopVS();
-						System.out.println("stopVS!!!!!!!!!!");
-						break;
-					case 2:
-						((C02Activity)context).stopVS();
-						break;
-					case 10: case 12:
-						((C10Activity)context).stopVS();
-						break;
-					case 20: case 21:
-						((C20Activity)context).stopVS();
-						break;
-						
+						case 0:
+							((C00Activity)context).stopVS();
+							break;
+						case 1:
+							((C01Activity)context).stopVS();
+							Log.d("####", "client Thread stopVS");
+							break;
+						case 2:
+							((C02Activity)context).stopVS();
+							break;
+						case 10: case 12:
+							((C10Activity)context).stopVS();
+							break;
+						case 20: case 21:
+							((C20Activity)context).stopVS();
+							break;
 					}
 
 //					if(context instanceof C00Activity){

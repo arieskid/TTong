@@ -67,7 +67,9 @@ public class LanAudioRecord extends Thread
 		int m_in_buf_size = AudioRecord.getMinBufferSize(SampleRate, AudioFormat.CHANNEL_CONFIGURATION_MONO,
 				AudioFormat.ENCODING_PCM_16BIT);
 		
+		Log.d("####", "LanAudioRecord : " + String.valueOf(flag));
 		if(flag){
+			Log.d("####", "LanAudioRecord	m_in_rec	created!!");
 			m_in_rec = new AudioRecord(MediaRecorder.AudioSource.MIC, SampleRate, AudioFormat.CHANNEL_CONFIGURATION_MONO,
 				AudioFormat.ENCODING_PCM_16BIT, m_in_buf_size * 2/* 10 */);
 		}
@@ -128,6 +130,7 @@ public class LanAudioRecord extends Thread
 		}
 		
 		if(flag){
+			Log.d("####", "LanAudioRecord	encoder		created!!");
 			encoder = new Encoder(this.codectype, ec_buffer_pkgs);
 			encoder.startThread();
 			m_in_rec.startRecording();  
@@ -149,6 +152,7 @@ public class LanAudioRecord extends Thread
 			writepos = (writepos + mFrameSize) % (mFrameSize * (mFrameRate + 1));
 
 			if(flag){
+				
 				if (encoder.isIdle()) {/* encoder����ʱ��д�룬ʹ��readpos����ֹ���ݶ�ʧ���Ƿ�����ӳ٣����� */
 					encoder.putData(System.currentTimeMillis(), Audio_in, readpos, mFrameSize);
 					readpos = (readpos + mFrameSize) % (mFrameSize * (mFrameRate + 1));
@@ -159,6 +163,7 @@ public class LanAudioRecord extends Thread
 				/* if(encoder.isGetData()) */
 				
 				if(flag){
+					
 					while (encoder.isGetData()) /* ���������������ݵ�ʱ�򣬾ͽ���ȡ��ͨ��rtp���ͳ�ȥ */
 					{
 						try {
@@ -182,7 +187,7 @@ public class LanAudioRecord extends Thread
 				}
 				
 			}
-			Log.e(TAG, "One time record time is " + (System.currentTimeMillis() - ms));
+			//Log.e(TAG, "One time record time is " + (System.currentTimeMillis() - ms));
 		}
 		free();
 
@@ -239,6 +244,7 @@ public class LanAudioRecord extends Thread
 		Log.i(TAG, "LanAudioRecod free");
 		
 		if(flag){
+			Log.d("####", "LanAudioRecord	free");
 			m_in_rec.stop();
 			encoder.stopThread();
 		}

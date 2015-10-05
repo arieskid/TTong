@@ -112,15 +112,12 @@ public class C01Activity extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.action_call_stop) {
+			Log.d("####", "C01 : stop call 내가 눌렀을 때");
 			MainActivity.clientThread.send("StopCall ");
-			
 			stopVS();
-			System.out.println("StopCall C01 Activity!");
-			
 			Intent i = new Intent(this, MainActivity.class);
-			System.out.println("StopCall C01 Activity!2");
 			startActivity(i);
-			System.out.println("StopCall C01 Activity!3");
+			LanAudioRecord.flag = true;
 			finish();
 			return true;
 		}
@@ -221,9 +218,10 @@ public class C01Activity extends Activity implements OnClickListener {
 	}
 	
 	public void stopVS(){
-		LanAudioRecord.flag = true;
+		Log.d("####", "C01 : stopVS");
 		
 		if (isStarted == true) {
+			Log.d("####", "C01 : stopVS into if문");
 			mMediaService.stopAudio();
 			System.out.println("StopCall C01Activity stopVS");
 			isStarted = false;
